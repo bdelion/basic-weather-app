@@ -1,30 +1,27 @@
-/**
- * 
- */
 package org.fifiz.training.java.basic_weather_app.owm;
 
 /**
+ * Classe vent.
  * @author bertrand
- *
  */
 public class Wind {
 
-	private Float speed;
-	private Float deg;
+    private Double speed;
+    private Double deg;
 
-	public Float getSpeed() {
-		return speed;
-	}
+    public Double getSpeed() {
+        return speed;
+    }
 
-	public void setSpeed(Float speed) {
-		this.speed = speed;
-	}
+    public void setSpeed(Double speed) {
+        this.speed = speed;
+    }
 
-	public Float getDeg() {
-		return deg;
-	}
+    public Double getDeg() {
+        return deg;
+    }
 
-	public void setDeg(Float deg) {
-		this.deg = deg;
-	}
+    public void setDeg(Double deg) {
+        this.deg = deg;
+    }
 }

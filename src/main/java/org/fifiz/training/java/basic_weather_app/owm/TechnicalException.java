@@ -1,22 +1,18 @@
 package org.fifiz.training.java.basic_weather_app.owm;
 
 /**
- *
- * @author bertrand
- */
+* Classe exception technique.
+* @author bertrand
+*/
 public class TechnicalException extends RuntimeException {
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    public TechnicalException(String message) {
+        super(message);
+    }
 
-	public TechnicalException(String message) {
-		super(message);
-	}
-
-	public TechnicalException(String message, Throwable cause) {
-		super(message, cause);
-	}
+    public TechnicalException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
 }

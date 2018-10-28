@@ -1,20 +1,25 @@
+/**
+ * Unit test for simple App.
+* @author bertrand
+*/
+
 package org.fifiz.training.java.basic_weather_app;
 
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+
 /**
- * Unit test for simple App.
- */
-public class AppTest 
-{
-    /**
+ * Test App.
+* @author bertrand
+*/
+public class AppTest {
+    /** Test rigoureux.
      * Rigorous Test :-)
      */
     @Test
-    public void shouldAnswerWithTrue()
-    {
-        assertTrue( true );
+    public void shouldAnswerWithTrue() {
+        assertTrue(true);
     }
 }

@@ -157,6 +157,32 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<!-- Upload code coverage reports to codacy.com -->
+			<plugin>
+				<groupId>com.gavinmogan</groupId>
+				<artifactId>codacy-maven-plugin</artifactId>
+				<version>1.0.3</version>
+				<configuration>
+					<apiToken>iORaPgvl6OEVY3UfnsoL</apiToken>
+					<projectToken>e150ffd07c32435893bb6902d28fb555</projectToken>
+					<language>Java</language>
+					<coverageReportFile>${project.build.directory}/site/jacoco/jacoco.xml</coverageReportFile>
+					<!-- <commit>${env.TRAVIS_COMMIT}</commit> -->
+					<codacyApiBaseUrl>https://api.codacy.com</codacyApiBaseUrl>
+					<failOnMissingReportFile>false</failOnMissingReportFile>
+				</configuration>
+				<executions>
+					<execution>
+						<id>post-test</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>coverage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-report-plugin</artifactId>

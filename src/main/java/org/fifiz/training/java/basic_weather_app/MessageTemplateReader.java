@@ -1,8 +1,3 @@
-/**
- * Classe de lecture des messages à partir d'un template
- * @author bertrand
- */
-
 package org.fifiz.training.java.basic_weather_app;
 
 import java.io.BufferedReader;
@@ -13,7 +8,7 @@ import java.io.InputStreamReader;
 import org.apache.logging.log4j.LogManager;
 
 /**
- * MessageTemplateReader.
+ * Classe de lecture des messages à partir d'un template
  * @author bertrand
  */
 public final class MessageTemplateReader {

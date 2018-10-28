@@ -17,9 +17,9 @@ public class Wind {
         this.speed = speed;
     }
 
-    public Double getDeg() {
-        return deg;
-    }
+  public Double getDeg() {
+    return deg;
+  }
 
     public void setDeg(Double deg) {
         this.deg = deg;

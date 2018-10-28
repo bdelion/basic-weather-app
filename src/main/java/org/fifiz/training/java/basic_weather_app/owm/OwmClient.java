@@ -38,9 +38,9 @@ public class OwmClient {
         this.owmUrlClient = owmUrl;
         this.jsonMapper = new ObjectMapper();
         // attention à  la configuration du mapper
-        this.jsonMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        this.jsonMapper.configure(DeserializationFeature.FAIL_ON_UNRESOLVED_OBJECT_IDS, false);
 
-        LOG.info("Exiting OwmClient.");
+        LOG.info("Exiting OwmClient : " + this.owmUrlClient);
     }
 
     /**
@@ -69,6 +69,7 @@ public class OwmClient {
             }
             // pour avoir une sortie structurée du flux : http://json.parser.online.fr/
             weatherResult = this.jsonMapper.readValue(owmConnection.getInputStream(), WeatherResult.class);
+            LOG.info("After jsonMapprt : " + weatherResult);
         } catch (MalformedURLException ex) {
             throw new TechnicalException("Oups ! Pb sur l'URL", ex);
         } catch (IOException ex) {

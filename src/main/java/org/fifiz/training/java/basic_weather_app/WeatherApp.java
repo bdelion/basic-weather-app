@@ -37,7 +37,6 @@ class WeatherApp {
         OwmClient owmc = new OwmClient(null);
         try {
             WeatherResult cpWeather = owmc.getWeather(codePostal);
-
             String msgTmpl = MessageTemplateReader.read();
 
             if (!"".equals(msgTmpl)) {

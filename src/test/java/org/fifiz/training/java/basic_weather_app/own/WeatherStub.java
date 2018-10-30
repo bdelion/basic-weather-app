@@ -1,10 +1,14 @@
 package org.fifiz.training.java.basic_weather_app.own;
 
-import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
+import static com.github.tomakehurst.wiremock.client.WireMock.get;
+import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
+import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
+
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
+
 import org.apache.commons.io.IOUtils;
 
 /**

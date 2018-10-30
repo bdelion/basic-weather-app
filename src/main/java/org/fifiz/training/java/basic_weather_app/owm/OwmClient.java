@@ -5,7 +5,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.apache.logging.log4j.*;
 
@@ -74,6 +75,8 @@ public class OwmClient {
         // déclarations de variables locales
         WeatherResult weatherResult = null;
         HttpURLConnection owmConnection = null;
+
+        LOG.info("this.owmUrlClient : " + this.getOwnUrl());
 
         // lire le flux et le convertir en objet
         try {

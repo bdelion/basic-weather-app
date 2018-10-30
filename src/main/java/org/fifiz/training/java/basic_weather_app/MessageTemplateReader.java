@@ -6,13 +6,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Classe de lecture des messages à partir d'un template
+ * 
  * @author bertrand
  */
 public final class MessageTemplateReader {
-    private static final org.apache.logging.log4j.Logger LOG = LogManager.getLogger(MessageTemplateReader.class);
+    private static final Logger LOG = LogManager.getLogger(MessageTemplateReader.class);
 
     private MessageTemplateReader() {
         // not called
@@ -46,6 +48,8 @@ public final class MessageTemplateReader {
                 try {
                     if (inS != null) {
                         inS.close();
+                        // [TODEL]
+                        LOG.info("Fermeture Stream");
                     }
                 } catch (IOException ex) {
                     LOG.error("Oups ! Pb à la fermeture du flux.", ex);

@@ -52,6 +52,7 @@ class WeatherApp {
         try {
             WeatherResult cpWeather = owmc.getWeather();
             String msgTmpl = MessageTemplateReader.read();
+            MYLOGGER.info("msgTmpl : " + msgTmpl);
 
             if (!"".equals(msgTmpl)) {
                 System.out.println(FORMATSEPARATOR);

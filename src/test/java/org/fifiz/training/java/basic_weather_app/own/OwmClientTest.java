@@ -28,7 +28,7 @@ public class OwmClientTest {
     private final static String WEATHER_API_PATH = "/current";
 
     @Test
-    public void testGetWeather_Ok_Name() throws IOException {
+    public void testGetWeatherNameOk() throws IOException {
         (new WeatherStub(WEATHER_API_PATH, 200, "owm_current_niort_ok.json")).stub();
 
         OwmClient client = new OwmClient(new URL("http://localhost:{port}{path}"
@@ -38,7 +38,7 @@ public class OwmClientTest {
     }
 
     @Test(expected = TechnicalException.class)
-    public void testGetWeather_404() throws IOException {
+    public void testGetWeather404() throws IOException {
         (new WeatherStub(WEATHER_API_PATH, 404)).stub();
 
         OwmClient client = new OwmClient(new URL("http://localhost:{port}{path}"
@@ -53,7 +53,7 @@ public class OwmClientTest {
      * @throws IOException
      */
     @Test
-    public void testGetWeather_Ok_Base() throws IOException {
+    public void testGetWeatherBaseOk() throws IOException {
         (new WeatherStub(WEATHER_API_PATH, 200, "owm_current_niort_ok.json")).stub();
 
         OwmClient owmC = new OwmClient(new URL("http://localhost:{port}{path}"

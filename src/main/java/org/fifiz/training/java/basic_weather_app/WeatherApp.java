@@ -1,6 +1,8 @@
 package org.fifiz.training.java.basic_weather_app;
 
+import java.net.MalformedURLException;
 import java.util.Scanner;
+import java.net.URL;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,7 +11,9 @@ import org.fifiz.training.java.basic_weather_app.owm.TechnicalException;
 import org.fifiz.training.java.basic_weather_app.owm.WeatherResult;
 
 /**
- * Application Java basique et autonome donnant la meteo pour un code postal en France.
+ * Application Java basique et autonome donnant la meteo pour un code postal en
+ * France.
+ * 
  * @author bertrand
  */
 class WeatherApp {
@@ -20,8 +24,9 @@ class WeatherApp {
 
     /**
      * @param args
+     * @throws MalformedURLException
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MalformedURLException {
         // To run this application from the command line, try:
         // java -jar javaBasicTraining.jar
 
@@ -34,17 +39,24 @@ class WeatherApp {
         String codePostal = sc.nextLine();
 
         // appel au service de météo
-        OwmClient owmc = new OwmClient(null);
+        // OwmClient owmc = new OwmClient(codePostal);
+        String urlApiOwm = "http://api.openweathermap.org/data/2.5/weather?zip={codePostal},fr&APPID=8c05dfed7d5d0d8ba3a2bc70b83b227f";
+
+        MYLOGGER.info("codePostal : " + codePostal);
+        MYLOGGER.info("urlApiOwm : " + urlApiOwm);
+        urlApiOwm = urlApiOwm.replace("{codePostal}", codePostal);
+        MYLOGGER.info("urlApiOwm.replace : " + urlApiOwm);
+
+        URL owmUrlClient = new URL(urlApiOwm);
+        OwmClient owmc = new OwmClient(owmUrlClient);
         try {
-            WeatherResult cpWeather = owmc.getWeather(codePostal);
+            WeatherResult cpWeather = owmc.getWeather();
             String msgTmpl = MessageTemplateReader.read();
 
             if (!"".equals(msgTmpl)) {
-                System.out.println(FORMATSEPARATOR);                
-                System.out.println(msgTmpl.replace("{city}", cpWeather.getName())
-                        .replace("{cp}", codePostal)
-                        .replace("{country}", cpWeather.getSys().getCountry())
-                        .replace("{base}", cpWeather.getBase())
+                System.out.println(FORMATSEPARATOR);
+                System.out.println(msgTmpl.replace("{city}", cpWeather.getName()).replace("{cp}", codePostal)
+                        .replace("{country}", cpWeather.getSys().getCountry()).replace("{base}", cpWeather.getBase())
                         .replace("{lon}", String.valueOf(cpWeather.getCoord().getLon()))
                         .replace("{lat}", String.valueOf(cpWeather.getCoord().getLat()))
                         .replace("{weather.main}", cpWeather.getWeather().get(0).getMain())

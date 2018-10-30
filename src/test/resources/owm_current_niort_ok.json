@@ -1,0 +1,41 @@
+{
+    "coord": {
+        "lon": -0.46,
+        "lat": 46.32
+    },
+    "weather": [
+        {
+            "id": 803,
+            "main": "Clouds",
+            "description": "broken clouds",
+            "icon": "04d"
+        }
+    ],
+    "base": "cmc stations",
+    "main": {
+        "temp": 284.161,
+        "pressure": 1027.91,
+        "humidity": 88,
+        "temp_min": 284.161,
+        "temp_max": 284.161,
+        "sea_level": 1033.9,
+        "grnd_level": 1027.91
+    },
+    "wind": {
+        "speed": 3.91,
+        "deg": 358.502
+    },
+    "clouds": {
+        "all": 76
+    },
+    "dt": 1448551717,
+    "sys": {
+        "message": 0.003,
+        "country": "FR",
+        "sunrise": 1448522306,
+        "sunset": 1448554781
+    },
+    "id": 2990355,
+    "name": "Niort",
+    "cod": 200
+}

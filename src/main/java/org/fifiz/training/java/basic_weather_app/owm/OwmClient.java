@@ -5,14 +5,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.*;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 /**
  * Classe client d'appel à openweathermap.
+ * 
  * @author bertrand
  */
 // Open weather map api key :
@@ -28,39 +27,57 @@ public class OwmClient {
 
     private ObjectMapper jsonMapper;
 
+    
     /**
      * Constructor
+     * 
      * @author bertrand
      */
-    public OwmClient(URL owmUrl) {
-        LOG.info("Entering OwmClient : " + owmUrl);
+    public OwmClient(URL UrlClient) {
+        LOG.info("URL UrlClient : " + UrlClient);
 
-        this.owmUrlClient = owmUrl;
+        this.owmUrlClient = UrlClient;
         this.jsonMapper = new ObjectMapper();
         // attention à  la configuration du mapper
-        this.jsonMapper.configure(DeserializationFeature.FAIL_ON_UNRESOLVED_OBJECT_IDS, false);
+        this.jsonMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-        LOG.info("Exiting OwmClient : " + this.owmUrlClient);
+        LOG.info("URL this.owmUrlClient : " + this.getOwnUrl());
+    }
+    
+    /**
+     * Constructor
+     * 
+     * @author bertrand
+     * @throws MalformedURLException
+     */
+    public OwmClient(String codePostal) throws MalformedURLException {
+        String urlApiOwm = "http://api.openweathermap.org/data/2.5/weather?zip={codePostal},fr&APPID=8c05dfed7d5d0d8ba3a2bc70b83b227f";
+
+        LOG.info("STRING codePostal : " + codePostal);
+        LOG.info("STRING urlApiOwm : " + urlApiOwm);
+        urlApiOwm = urlApiOwm.replace("{codePostal}", codePostal);
+        LOG.info("STRING urlApiOwm.replace : " + urlApiOwm);
+
+        this.owmUrlClient = new URL(urlApiOwm);
+        this.jsonMapper = new ObjectMapper();
+        // attention à  la configuration du mapper
+        this.jsonMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+        LOG.info("STRING this.owmUrlClient : " + this.getOwnUrl());
     }
 
     /**
      * @author bertrand
      * @return weatherResult d'une apple
      */
-    public WeatherResult getWeather(String codePostal) {
-        LOG.info("Entering getWeather : " + codePostal);
-
-        String urlApiOwm = "http://api.openweathermap.org/data/2.5/weather?zip=" + codePostal
-                + ",fr&APPID=8c05dfed7d5d0d8ba3a2bc70b83b227f";
-
+    public WeatherResult getWeather() {
         // déclarations de variables locales
         WeatherResult weatherResult = null;
         HttpURLConnection owmConnection = null;
 
         // lire le flux et le convertir en objet
         try {
-            URL owmUrl = new URL(urlApiOwm);
-            owmConnection = (HttpURLConnection) owmUrl.openConnection();
+            owmConnection = (HttpURLConnection) this.owmUrlClient.openConnection();
             // sortie en erreur si le code retour est KO <>200
             if (owmConnection.getResponseCode() != HttpURLConnection.HTTP_OK) {
                 throw new TechnicalException(
@@ -69,7 +86,6 @@ public class OwmClient {
             }
             // pour avoir une sortie structurée du flux : http://json.parser.online.fr/
             weatherResult = this.jsonMapper.readValue(owmConnection.getInputStream(), WeatherResult.class);
-            LOG.info("After jsonMapprt : " + weatherResult);
         } catch (MalformedURLException ex) {
             throw new TechnicalException("Oups ! Pb sur l'URL", ex);
         } catch (IOException ex) {

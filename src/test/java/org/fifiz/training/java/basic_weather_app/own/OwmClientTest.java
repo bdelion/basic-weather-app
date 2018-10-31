@@ -81,6 +81,9 @@ public class OwmClientTest {
         sysInt.setCountry("FR");
         sysInt.setSunrise(1448522306);
         sysInt.setSunset(1448554781);
-        //assertEquals("Les 2 objets sont égaux.", sysInt, weatherR.getSys());
+        assertEquals("Messages égaux.", sysInt.getMessage(), weatherR.getSys().getMessage());
+        assertEquals("Country égaux.", sysInt.getCountry(), weatherR.getSys().getCountry());
+        assertEquals("Sunrise égaux.", sysInt.getSunrise(), weatherR.getSys().getSunrise());
+        assertEquals("Sunset égaux.", sysInt.getSunset(), weatherR.getSys().getSunset());
     }
 }

@@ -69,7 +69,7 @@ public class OwmClientTest {
      * @throws IOException
      */
     @Test
-    public void testGetWeather_Ok_SysInternals() throws IOException {
+    public void testGetWeatherSysInternalsOk() throws IOException {
         (new WeatherStub(WEATHER_API_PATH, 200, "owm_current_niort_ok.json")).stub();
 
         OwmClient owmC = new OwmClient(new URL("http://localhost:{port}{path}"

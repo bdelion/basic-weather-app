@@ -1,8 +1,8 @@
 package org.fifiz.training.java.basic_weather_app;
 
 import java.net.MalformedURLException;
-import java.util.Scanner;
 import java.net.URL;
+import java.util.Scanner;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -51,7 +51,7 @@ class WeatherApp {
         OwmClient owmc = new OwmClient(owmUrlClient);
         try {
             WeatherResult cpWeather = owmc.getWeather();
-            String msgTmpl = MessageTemplateReader.read();
+            String msgTmpl = MessageTemplateReaderUtils.read();
             MYLOGGER.info("msgTmpl : " + msgTmpl);
 
             if (!"".equals(msgTmpl)) {

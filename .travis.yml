@@ -20,5 +20,6 @@ script:
 after_success:
 #For Codecov Test Coverage
   - bash <(curl -s https://codecov.io/bash)
+after_script:
 #For Code Climate Test Coverage
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT 

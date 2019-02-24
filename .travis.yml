@@ -1,1 +1,6 @@
+# Set the token in Travis environment settings instead defining here.
+env:
+  global:
+    - CODECOV_TOKEN="f095166d-5a9b-4a1a-ada5-97a227937eae"
+    - CC_TEST_REPORTER_ID="642ea9f3c58c93cf5dcb6287099228ac278dd9095311feebf2c041756875bd32"
 language: java

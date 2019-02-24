@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/bdelion/basic-weather-app.svg?branch=master)](https://travis-ci.com/bdelion/basic-weather-app)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c661294477af4801929d0abb9e9613cf)](https://www.codacy.com/app/bdelion/basic-weather-app?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=bdelion/basic-weather-app&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/c661294477af4801929d0abb9e9613cf)](https://www.codacy.com/app/bdelion/basic-weather-app?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=bdelion/basic-weather-app&amp;utm_campaign=Badge_Coverage)
 

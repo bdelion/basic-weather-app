@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<!-- Version du fichier -->
 	<modelVersion>4.0.0</modelVersion>
 	<!-- POM parent -->
-
 	<!-- Definition de l'artefact -->
 	<groupId>org.fifiz.training.java</groupId>
 	<artifactId>basic-weather-app</artifactId>
@@ -15,16 +12,13 @@
 	<description>Application Java basique et autonome donnant la météo pour un code postal en France</description>
 	<!-- FIXME change it to the project's website -->
 	<url>http://www.fifiz-company.org</url>
-
 	<!-- Gestionnaire de code source -->
-
 	<!-- Liste des proprietes -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
-
 	<!-- Liste des dependances -->
 	<dependencies>
 		<!-- Pour les logs -->
@@ -72,7 +66,6 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
 	<!-- Configuration de la construction des livrables -->
 	<build>
 		<pluginManagement>
@@ -102,7 +95,6 @@
 				-->
 			</plugins>
 		</pluginManagement>
-
 		<plugins>
 			<!--
 			<plugin>
@@ -179,13 +171,20 @@
 					</execution>
 				</executions>
 			</plugin>
-
 			<!-- Upload code coverage reports to codacy.com -->
 			<plugin>
 				<groupId>com.gavinmogan</groupId>
 				<artifactId>codacy-maven-plugin</artifactId>
 				<version>1.0.3</version>
 				<configuration>
+					<activation>
+						<property>
+							<name>!maven.test.skip</name>
+						</property>
+						<property>
+							<name>!skipTests</name>
+						</property>
+					</activation>
 					<apiToken>iORaPgvl6OEVY3UfnsoL</apiToken>
 					<projectToken>e150ffd07c32435893bb6902d28fb555</projectToken>
 					<language>Java</language>
@@ -204,7 +203,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-report-plugin</artifactId>
@@ -223,7 +221,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
 				<groupId>org.owasp</groupId>
 				<artifactId>dependency-check-maven</artifactId>
@@ -247,7 +244,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
@@ -268,7 +264,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>3.1.0</version>
@@ -284,7 +279,6 @@
 			</plugin>
 		</plugins>
 	</build>
-
 	<reporting>
 		<plugins>
 			<plugin>
@@ -331,7 +325,6 @@
 					</reportSet>
 				</reportSets>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-project-info-reports-plugin</artifactId>

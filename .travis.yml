@@ -4,3 +4,11 @@ env:
     - CODECOV_TOKEN="f095166d-5a9b-4a1a-ada5-97a227937eae"
     - CC_TEST_REPORTER_ID="642ea9f3c58c93cf5dcb6287099228ac278dd9095311feebf2c041756875bd32"
 language: java
+jdk: oraclejdk8
+cache:
+  directories:
+  - $HOME/.m2
+install: true
+script:
+  - ./mvnw clean install
+  - bash <(curl -s https://codecov.io/bash)

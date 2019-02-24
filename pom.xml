@@ -18,6 +18,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<dependency-check-maven.version>5.0.0-M1</dependency-check-maven.version>
 	</properties>
 	<!-- Liste des dependances -->
 	<dependencies>
@@ -66,6 +67,44 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<profiles>
+		<profile>
+			<!-- Upload code coverage reports to codacy.com -->
+			<id>upload-coverage-report-to-codact</id>
+			<activation>
+				<file>
+					<exists>target/site/jacoco/jacoco.xml</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.gavinmogan</groupId>
+						<artifactId>codacy-maven-plugin</artifactId>
+						<version>1.0.3</version>
+						<configuration>
+							<apiToken>iORaPgvl6OEVY3UfnsoL</apiToken>
+							<projectToken>e150ffd07c32435893bb6902d28fb555</projectToken>
+							<language>Java</language>
+							<coverageReportFile>${project.build.directory}/site/jacoco/jacoco.xml</coverageReportFile>
+							<!-- <commit>${env.TRAVIS_COMMIT}</commit> -->
+							<codacyApiBaseUrl>https://api.codacy.com</codacyApiBaseUrl>
+							<failOnMissingReportFile>true</failOnMissingReportFile>
+						</configuration>
+						<executions>
+							<execution>
+								<id>post-test</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>coverage</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 	<!-- Configuration de la construction des livrables -->
 	<build>
 		<pluginManagement>
@@ -171,38 +210,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- Upload code coverage reports to codacy.com -->
-			<plugin>
-				<groupId>com.gavinmogan</groupId>
-				<artifactId>codacy-maven-plugin</artifactId>
-				<version>1.0.3</version>
-				<configuration>
-					<activation>
-						<property>
-							<name>!maven.test.skip</name>
-						</property>
-						<property>
-							<name>!skipTests</name>
-						</property>
-					</activation>
-					<apiToken>iORaPgvl6OEVY3UfnsoL</apiToken>
-					<projectToken>e150ffd07c32435893bb6902d28fb555</projectToken>
-					<language>Java</language>
-					<coverageReportFile>${project.build.directory}/site/jacoco/jacoco.xml</coverageReportFile>
-					<!-- <commit>${env.TRAVIS_COMMIT}</commit> -->
-					<codacyApiBaseUrl>https://api.codacy.com</codacyApiBaseUrl>
-					<failOnMissingReportFile>true</failOnMissingReportFile>
-				</configuration>
-				<executions>
-					<execution>
-						<id>post-test</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>coverage</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-report-plugin</artifactId>
@@ -224,7 +231,7 @@
 			<plugin>
 				<groupId>org.owasp</groupId>
 				<artifactId>dependency-check-maven</artifactId>
-				<version>3.3.3</version>
+				<version>${dependency-check-maven.version}</version>
 				<configuration>
 					<!-- Generate all report formats -->
 					<format>ALL</format>
@@ -311,7 +318,7 @@
 			<plugin>
 				<groupId>org.owasp</groupId>
 				<artifactId>dependency-check-maven</artifactId>
-				<version>3.3.3</version>
+				<version>${dependency-check-maven.version}</version>
 				<configuration>
 					<format>ALL</format>
 					<centralAnalyzerEnabled>false</centralAnalyzerEnabled>

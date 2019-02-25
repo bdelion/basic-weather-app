@@ -20,6 +20,8 @@ script:
 after_success:
 #For Codecov Test Coverage
   - bash <(curl -s https://codecov.io/bash)
+#For Coveralls Test Coverage
+  - mvn clean test jacoco:report cobertura:cobertura coveralls:report
 after_script:
 #For Code Climate Test Coverage
   - ./cc-test-reporter after-build -d --exit-code $TRAVIS_TEST_RESULT 

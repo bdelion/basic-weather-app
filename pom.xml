@@ -109,13 +109,11 @@
                 You can run jacoco in the default profile with:
                 mvn jacoco:prepare-agent test jacoco:report
             -->
-            <!-- TODO
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.3</version>
             </plugin>
-            -->
             <!-- Goal qui copie les dépendances du projet du référentiel vers un emplacement défini. -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -143,7 +141,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-							<classpathPrefix>dependency-jars/</classpathPrefix>
+                            <classpathPrefix>dependency-jars/</classpathPrefix>
                             <mainClass>org.fifiz.training.java.basic_weather_app.WeatherApp</mainClass>
                         </manifest>
                     </archive>
@@ -179,9 +177,7 @@
         <profile>
             <id>jacoco</id>
             <activation>
-                <property>
-                    <name>env.TRAVIS</name>
-                </property>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <build>
                 <plugins>
@@ -213,7 +209,6 @@
         - we want to break the build on any checkstyle violation.
         - we want to be able to publish coverage report to coveralls.
         -->
-        <!-- TODO
         <profile>
             <id>travis</id>
             <activation>
@@ -236,11 +231,7 @@
                             </execution>
                         </executions>
                     </plugin>
-        -->
-
-                    <!-- https://github.com/trautonen/coveralls-maven-plugin -->
-        
-        <!--TODO
+        <!-- https://github.com/trautonen/coveralls-maven-plugin -->
                     <plugin>
                         <groupId>org.eluder.coveralls</groupId>
                         <artifactId>coveralls-maven-plugin</artifactId>
@@ -249,6 +240,5 @@
                 </plugins>
             </build>
         </profile>
-        -->
     </profiles>
 </project>

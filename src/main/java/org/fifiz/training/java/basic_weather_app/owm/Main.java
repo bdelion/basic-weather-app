@@ -2,7 +2,7 @@ package org.fifiz.training.java.basic_weather_app.owm;
 
 /**
  * Classe principale.
- * 
+ *
  * @author bertrand
  */
 public class Main {

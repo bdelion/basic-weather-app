@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * Classe client d'appel à openweathermap.
- * 
+ *
  * @author bertrand
  */
 // Open weather map api key :
@@ -29,26 +29,25 @@ public class OwmClient {
 
     private ObjectMapper jsonMapper;
 
-    
     /**
      * Constructor
-     * 
+     *
      * @author bertrand
      */
-    public OwmClient(URL UrlClient) {
-        LOG.info("URL UrlClient : " + UrlClient);
+    public OwmClient(URL urlClient) {
+        LOG.info("URL UrlClient : " + urlClient);
 
-        this.owmUrlClient = UrlClient;
+        this.owmUrlClient = urlClient;
         this.jsonMapper = new ObjectMapper();
         // attention à  la configuration du mapper
         this.jsonMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         LOG.info("URL this.owmUrlClient : " + this.getOwnUrl());
     }
-    
+
     /**
      * Constructor
-     * 
+     *
      * @author bertrand
      * @throws MalformedURLException
      */

@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * Classe de lecture des messages à partir d'un template.
- * 
+ *
  * @author bertrand
  */
 public final class MessageTemplateReaderUtils {

@@ -13,7 +13,7 @@ import org.fifiz.training.java.basic_weather_app.owm.WeatherResult;
 /**
  * Application Java basique et autonome donnant la meteo pour un code postal en
  * France.
- * 
+ *
  * @author bertrand
  */
 class WeatherApp {

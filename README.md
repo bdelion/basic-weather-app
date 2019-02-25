@@ -7,7 +7,9 @@ Code Climate
 [![Maintainability](https://api.codeclimate.com/v1/badges/bd5d2ee7ab717b88cad0/maintainability)](https://codeclimate.com/github/bdelion/basic-weather-app/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/bd5d2ee7ab717b88cad0/test_coverage)](https://codeclimate.com/github/bdelion/basic-weather-app/test_coverage)  
 Codecov  
-[![codecov](https://codecov.io/gh/bdelion/basic-weather-app/branch/master/graph/badge.svg)](https://codecov.io/gh/bdelion/basic-weather-app)
+[![codecov](https://codecov.io/gh/bdelion/basic-weather-app/branch/master/graph/badge.svg)](https://codecov.io/gh/bdelion/basic-weather-app)  
+CoverAlls  
+[![Coverage Status](https://coveralls.io/repos/github/bdelion/basic-weather-app/badge.svg?branch=master)](https://coveralls.io/github/bdelion/basic-weather-app?branch=master)  
 
 # basic-weather-app
 

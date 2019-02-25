@@ -113,6 +113,17 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.3</version>
             </plugin>
+            <!--
+                Execute Maven to create JaCoCo report and submit Coveralls data : mvn clean test jacoco:report coveralls:report
+            -->
+            <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
+                <version>4.3.0</version>
+                <configuration>
+                    <repoToken>VdPhmjc9brgL7RKjVLV4JX8IOtkxwxNxd</repoToken>
+                </configuration>
+            </plugin>
             <!-- Goal qui copie les dépendances du projet du référentiel vers un emplacement défini. -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -127,6 +138,9 @@
                         </goals>
                         <configuration>
                             <outputDirectory>${project.build.directory}/dependency-jars/</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
                         </configuration>
                     </execution>
                 </executions>
@@ -146,11 +160,23 @@
                     </archive>
                 </configuration>
             </plugin>
+            <!-- Plug-in nécessaire pour maven-project-info-reports-plugin 3.0.0. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.7.1</version>
+            </plugin>
         </plugins>
     </build>
-    <!-- TODO
     <reporting>
         <plugins>
+            <!-- Plug-in qui génère des rapports standard pour le projet. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>3.0.0</version>
+            </plugin>
+            <!-- TODO
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -164,9 +190,14 @@
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
                 </configuration>
             </plugin>
+    -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.7</version>
+            </plugin>
         </plugins>
     </reporting>
-    -->
     <profiles>
         <!--
         This profile enables jacoco when unit tests are run.
@@ -260,6 +291,9 @@
                         <groupId>org.eluder.coveralls</groupId>
                         <artifactId>coveralls-maven-plugin</artifactId>
                         <version>4.3.0</version>
+                        <configuration>
+                            <repoToken>VdPhmjc9brgL7RKjVLV4JX8IOtkxwxNxd</repoToken>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>

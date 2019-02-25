@@ -171,8 +171,6 @@
     <profiles>
         <!--
         This profile enables jacoco when unit tests are run.
-        You can run it with mvn -P jacoco test.
-        It also activates itself on Travis.
         -->
         <profile>
             <id>jacoco</id>
@@ -205,17 +203,11 @@
             </build>
         </profile>
         <!--
-        For the Travis profile:
+        For the Checkstyle profile:
         - we want to break the build on any checkstyle violation.
-        - we want to be able to publish coverage report to coveralls.
         -->
         <profile>
-            <id>travis</id>
-            <activation>
-                <property>
-                    <name>env.TRAVIS</name>
-                </property>
-            </activation>
+            <id>checkstyle</id>
             <build>
                 <plugins>
                     <plugin>
@@ -231,7 +223,23 @@
                             </execution>
                         </executions>
                     </plugin>
-        <!-- https://github.com/trautonen/coveralls-maven-plugin -->
+                </plugins>
+            </build>
+        </profile>
+        <!--
+        For the Travis profile:
+        - we want to be able to publish coverage report to coveralls.
+        -->
+        <profile>
+            <id>travis</id>
+            <activation>
+                <property>
+                    <name>env.TRAVIS</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <!-- https://github.com/trautonen/coveralls-maven-plugin -->
                     <plugin>
                         <groupId>org.eluder.coveralls</groupId>
                         <artifactId>coveralls-maven-plugin</artifactId>

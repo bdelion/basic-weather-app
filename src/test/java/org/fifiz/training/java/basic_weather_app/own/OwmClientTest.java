@@ -21,10 +21,6 @@ import org.junit.Test;
  * @author bertrand
  */
 public class OwmClientTest {
-    @Rule
-    // No-args constructor defaults to port 8080
-    // 0 to dynamic port
-    public WireMockRule wireMR = new WireMockRule(0);
     // Chemin de la ressource l'api current weather de OWN
     private static final String WEATHER_API_PATH = "/current";
     //
@@ -35,13 +31,31 @@ public class OwmClientTest {
     private static final String LOCAL_URL_PORT = "{port}";
     //
     private static final String LOCAL_URL_PATH = "{path}";
+    //
+    private static final Float TEST_MSG = 0.003f;
+    //
+    private static final String TEST_COUNTRY = "FR";
+    //
+    private static final Integer TEST_SUNRISE = 1448522306;
+    //
+    private static final Integer TEST_SUNSET = 1448554781;
+
+    /**
+     * Test OwmClient Rule.
+     *
+     * @author bertrand
+     */
+    @Rule
+    // No-args constructor defaults to port 8080
+    // 0 to dynamic port
+    public WireMockRule wireMR = new WireMockRule(0);
 
     @Test
     public void testGetWeatherNameOk() throws IOException {
         (new WeatherStub(WEATHER_API_PATH, Response.SC_OK, OWN_CURRENT_RESULT_OK)).stub();
 
-        OwmClient client = new OwmClient(new URL(LOCAL_URL
-                .replace(LOCAL_URL_PORT, String.valueOf(wireMR.port())).replace(LOCAL_URL_PATH, WEATHER_API_PATH)));
+        OwmClient client = new OwmClient(new URL(LOCAL_URL.replace(LOCAL_URL_PORT, String.valueOf(wireMR.port()))
+                .replace(LOCAL_URL_PATH, WEATHER_API_PATH)));
         WeatherResult weatherResult = client.getWeather();
         assertEquals("Niort", weatherResult.getName());
     }
@@ -50,13 +64,13 @@ public class OwmClientTest {
     public void testGetWeather404() throws IOException {
         (new WeatherStub(WEATHER_API_PATH, Response.SC_NOT_FOUND)).stub();
 
-        OwmClient client = new OwmClient(new URL(LOCAL_URL
-                .replace(LOCAL_URL_PORT, String.valueOf(wireMR.port())).replace(LOCAL_URL_PATH, WEATHER_API_PATH)));
+        OwmClient client = new OwmClient(new URL(LOCAL_URL.replace(LOCAL_URL_PORT, String.valueOf(wireMR.port()))
+                .replace(LOCAL_URL_PATH, WEATHER_API_PATH)));
         client.getWeather();
     }
 
     /**
-     * Mes Tests
+     * Mes Tests.
      *
      * @author bertrand
      * @throws IOException
@@ -65,14 +79,14 @@ public class OwmClientTest {
     public void testGetWeatherBaseOk() throws IOException {
         (new WeatherStub(WEATHER_API_PATH, Response.SC_OK, OWN_CURRENT_RESULT_OK)).stub();
 
-        OwmClient owmC = new OwmClient(new URL(LOCAL_URL
-                .replace(LOCAL_URL_PORT, String.valueOf(wireMR.port())).replace(LOCAL_URL_PATH, WEATHER_API_PATH)));
+        OwmClient owmC = new OwmClient(new URL(LOCAL_URL.replace(LOCAL_URL_PORT, String.valueOf(wireMR.port()))
+                .replace(LOCAL_URL_PATH, WEATHER_API_PATH)));
         WeatherResult weatherR = owmC.getWeather();
         assertEquals("cmc stations", weatherR.getBase());
     }
 
     /**
-     * Mes Tests
+     * Mes Tests.
      *
      * @author bertrand
      * @throws IOException
@@ -81,15 +95,15 @@ public class OwmClientTest {
     public void testGetWeatherSysInternalsOk() throws IOException {
         (new WeatherStub(WEATHER_API_PATH, Response.SC_OK, OWN_CURRENT_RESULT_OK)).stub();
 
-        OwmClient owmC = new OwmClient(new URL(LOCAL_URL
-                .replace(LOCAL_URL_PORT, String.valueOf(wireMR.port())).replace(LOCAL_URL_PATH, WEATHER_API_PATH)));
+        OwmClient owmC = new OwmClient(new URL(LOCAL_URL.replace(LOCAL_URL_PORT, String.valueOf(wireMR.port()))
+                .replace(LOCAL_URL_PATH, WEATHER_API_PATH)));
         WeatherResult weatherR = owmC.getWeather();
 
         SysInternal sysInt = new SysInternal();
-        sysInt.setMessage(0.003f);
-        sysInt.setCountry("FR");
-        sysInt.setSunrise(1448522306);
-        sysInt.setSunset(1448554781);
+        sysInt.setMessage(TEST_MSG);
+        sysInt.setCountry(TEST_COUNTRY);
+        sysInt.setSunrise(TEST_SUNRISE);
+        sysInt.setSunset(TEST_SUNSET);
         assertEquals("Messages égaux.", sysInt.getMessage(), weatherR.getSys().getMessage());
         assertEquals("Country égaux.", sysInt.getCountry(), weatherR.getSys().getCountry());
         assertEquals("Sunrise égaux.", sysInt.getSunrise(), weatherR.getSys().getSunrise());

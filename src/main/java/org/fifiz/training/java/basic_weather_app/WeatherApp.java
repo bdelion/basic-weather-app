@@ -16,7 +16,7 @@ import org.fifiz.training.java.basic_weather_app.owm.WeatherResult;
  *
  * @author bertrand
  */
-class WeatherApp {
+public class WeatherApp {
     private static final Logger MYLOGGER = LogManager.getLogger(WeatherApp.class);
     private static final Double DELTATEMP = -273.15;
     private static final String FORMATTEMP = "%.2f °C";
@@ -30,7 +30,7 @@ class WeatherApp {
         // To run this application from the command line, try:
         // java -jar javaBasicTraining.jar
 
-        //TODEL MYLOGGER.info("Start");
+        MYLOGGER.info("Start");
 
         // On demande à l'utilisateur de saisir le code postal de la ville dont il veut
         // la météo
@@ -42,10 +42,10 @@ class WeatherApp {
         // OwmClient owmc = new OwmClient(codePostal);
         String urlApiOwm = "http://api.openweathermap.org/data/2.5/weather?zip={codePostal},fr&APPID=8c05dfed7d5d0d8ba3a2bc70b83b227f";
 
-        //TODEL MYLOGGER.info("codePostal : " + codePostal);
-        //TODEL MYLOGGER.info("urlApiOwm : " + urlApiOwm);
+        MYLOGGER.info("codePostal : " + codePostal);
+        MYLOGGER.info("urlApiOwm : " + urlApiOwm);
         urlApiOwm = urlApiOwm.replace("{codePostal}", codePostal);
-        //TODEL MYLOGGER.info("urlApiOwm.replace : " + urlApiOwm);
+        MYLOGGER.info("urlApiOwm.replace : " + urlApiOwm);
 
         URL owmUrlClient = new URL(urlApiOwm);
         OwmClient owmc = new OwmClient(owmUrlClient);

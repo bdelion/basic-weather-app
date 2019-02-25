@@ -13,7 +13,7 @@ import org.apache.commons.io.IOUtils;
 
 /**
  * WeatherStub.
- * 
+ *
  * @author bertrand
  */
 public class WeatherStub implements StubCase {
@@ -22,12 +22,22 @@ public class WeatherStub implements StubCase {
     private final int status;
     private final String jsonFileName;
 
+    /**
+     * WeatherStub without json file.
+     *
+     * @author bertrand
+     */
     public WeatherStub(String path, int status) {
         this.path = path;
         this.status = status;
         this.jsonFileName = null;
     }
 
+    /**
+     * WeatherStub with json file.
+     *
+     * @author bertrand
+     */
     public WeatherStub(String path, int status, String jsonFileName) {
         this.path = path;
         this.status = status;

@@ -30,7 +30,7 @@ public class OwmClient {
     private ObjectMapper jsonMapper;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @author bertrand
      */
@@ -46,7 +46,7 @@ public class OwmClient {
     }
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @author bertrand
      * @throws MalformedURLException

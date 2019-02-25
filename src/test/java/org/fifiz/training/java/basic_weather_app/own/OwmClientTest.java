@@ -51,13 +51,22 @@ public class OwmClientTest {
     public WireMockRule wireMR = new WireMockRule(0);
 
     @Test
-    public void testGetWeatherNameOk() throws IOException {
+    public void testGetWeatherURLOk() throws IOException {
         (new WeatherStub(WEATHER_API_PATH, Response.SC_OK, OWN_CURRENT_RESULT_OK)).stub();
 
         OwmClient client = new OwmClient(new URL(LOCAL_URL.replace(LOCAL_URL_PORT, String.valueOf(wireMR.port()))
                 .replace(LOCAL_URL_PATH, WEATHER_API_PATH)));
         WeatherResult weatherResult = client.getWeather();
         assertEquals("Niort", weatherResult.getName());
+    }
+
+    @Test
+    public void testGetWeatherCPOk() throws IOException {
+        (new WeatherStub(WEATHER_API_PATH, Response.SC_OK, OWN_CURRENT_RESULT_OK)).stub();
+
+        OwmClient client = new OwmClient("49000");
+        WeatherResult weatherResult = client.getWeather();
+        assertEquals("Angers", weatherResult.getName());
     }
 
     @Test(expected = TechnicalException.class)

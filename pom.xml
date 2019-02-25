@@ -237,6 +237,7 @@
         <!--
         For the Checkstyle profile:
         - we want to break the build on any checkstyle violation.
+        ! Manual execution !
         -->
         <profile>
             <id>checkstyle</id>
@@ -259,25 +260,37 @@
             </build>
         </profile>
         <!--
-        For the Codacy profile:
+        For the Travis profile:
+        - we want to failed on any vulnerability (OWASP)
         - we want to upload code coverage reports to codacy.com
         -->
         <profile>
-            <id>codacy</id>
-            <activation>
-                <file>
-                    <exists>target/site/jacoco/jacoco.xml</exists>
-                </file>
-            </activation>
-            <!--TODEL
+            <id>travis</id>
             <activation>
                 <property>
                     <name>env.TRAVIS</name>
                 </property>
             </activation>
-            -->
             <build>
                 <plugins>
+                    <!-- Check vulnerability -->
+                    <!-- https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html -->
+                    <plugin>
+                        <groupId>org.owasp</groupId>
+                        <artifactId>dependency-check-maven</artifactId>
+                        <version>5.0.0-M1</version>
+                        <configuration>
+                            <failBuildOnAnyVulnerability>true</failBuildOnAnyVulnerability>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- Codacy TU coverage -->
                     <plugin>
                         <groupId>com.gavinmogan</groupId>
                         <artifactId>codacy-maven-plugin</artifactId>
@@ -301,38 +314,6 @@
                                 <phase>verify</phase>
                                 <goals>
                                     <goal>coverage</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <!--
-        For the Travis profile:
-        - we want to failed on any vulnerability (OWASP)
-        -->
-        <profile>
-            <id>travis</id>
-            <activation>
-                <property>
-                    <name>env.TRAVIS</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <!-- https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html -->
-                    <plugin>
-                        <groupId>org.owasp</groupId>
-                        <artifactId>dependency-check-maven</artifactId>
-                        <version>5.0.0-M1</version>
-                        <configuration>
-                            <failBuildOnAnyVulnerability>true</failBuildOnAnyVulnerability>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>check</goal>
                                 </goals>
                             </execution>
                         </executions>

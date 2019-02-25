@@ -27,7 +27,5 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
 #For Coveralls Test Coverage
   - mvn test jacoco:report cobertura:cobertura coveralls:report
-#For Codacy Test Coverage
-#TODEL  - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r build/reports/jacoco/test/jacocoTestReport.xml
 #For Code Climate Test Coverage
   - ./cc-test-reporter after-build -t jacoco -p target/site/jacoco/jacoco.xml -d --exit-code $TRAVIS_TEST_RESULT 

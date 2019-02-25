@@ -106,8 +106,7 @@
             </plugin>
             -->
             <!--
-                You can run jacoco in the default profile with:
-                mvn jacoco:prepare-agent test jacoco:report
+                You can run jacoco in the default profile with: mvn jacoco:prepare-agent test jacoco:report
             -->
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -228,6 +227,7 @@
         </profile>
         <!--
         For the Travis profile:
+        - we want to failed on any vulnerability (OWASP)
         - we want to be able to publish coverage report to coveralls.
         -->
         <profile>
@@ -239,6 +239,22 @@
             </activation>
             <build>
                 <plugins>
+                    <!-- https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html -->
+                    <plugin>
+                        <groupId>org.owasp</groupId>
+                        <artifactId>dependency-check-maven</artifactId>
+                        <version>5.0.0-M1</version>
+                        <configuration>
+                            <failBuildOnAnyVulnerability>true</failBuildOnAnyVulnerability>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
                     <!-- https://github.com/trautonen/coveralls-maven-plugin -->
                     <plugin>
                         <groupId>org.eluder.coveralls</groupId>

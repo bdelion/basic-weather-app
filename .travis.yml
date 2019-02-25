@@ -26,7 +26,7 @@ after_success:
 #For Codecov Test Coverage
   - bash <(curl -s https://codecov.io/bash)
 #For Coveralls Test Coverage
-  - mvn clean test jacoco:report cobertura:cobertura coveralls:report
+  - mvn test jacoco:report cobertura:cobertura coveralls:report
 #For Codacy Test Coverage
 #TODEL  - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r build/reports/jacoco/test/jacocoTestReport.xml
 after_script:

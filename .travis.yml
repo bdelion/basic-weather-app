@@ -22,7 +22,7 @@ script:
 
 after_success:
 #For Codecov Test Coverage
- # - bash <(curl -s https://codecov.io/bash) -v || echo "Codecov did not collect coverage reports"
-  - curl -s https://codecov.io/bash | bash -s -v -d || echo "Codecov did not collect coverage reports"
+  - bash <(curl -s https://codecov.io/bash) -v || echo "Codecov did not collect coverage reports"
+#TODEL  - curl https://codecov.io/bash | bash -s -- -v -d || echo "Codecov did not collect coverage reports"
 #For Code Climate Test Coverage
   - ./cc-test-reporter after-build -t jacoco -p target/site/jacoco/jacoco.xml -d --exit-code $TRAVIS_TEST_RESULT 

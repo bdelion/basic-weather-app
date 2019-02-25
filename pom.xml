@@ -36,6 +36,8 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <codacy-api-token>iORaPgvl6OEVY3UfnsoL</codacy-api-token>
+        <codecy-project-token>e150ffd07c32435893bb6902d28fb555</codecy-project-token>
     </properties>
     <!-- Liste des dependances -->
     <dependencies>
@@ -262,18 +264,18 @@
         -->
         <profile>
             <id>codacy</id>
-            <!--TODEL
             <activation>
                 <file>
                     <exists>target/site/jacoco/jacoco.xml</exists>
                 </file>
             </activation>
-            -->
+            <!--TODEL
             <activation>
                 <property>
                     <name>env.TRAVIS</name>
                 </property>
             </activation>
+            -->
             <build>
                 <plugins>
                     <plugin>
@@ -281,8 +283,8 @@
                         <artifactId>codacy-maven-plugin</artifactId>
                         <version>1.0.3</version>
                         <configuration>
-                            <apiToken>${env.CODACY_API_TOKEN}</apiToken>
-                            <projectToken>${env.CODACY_PROJECT_TOKEN}</projectToken>
+                            <apiToken>${codacy-api-token}</apiToken>
+                            <projectToken>${codecy-project-token}</projectToken>
                             <language>Java</language>
                             <!--TODEL
                             <coverageReportFile>${project.build.directory}/site/jacoco/jacoco.xml</coverageReportFile>
@@ -291,7 +293,7 @@
                             <commit>${env.TRAVIS_COMMIT}</commit>
                             <!-- <commit>${env.TRAVIS_COMMIT}</commit> -->
                             <codacyApiBaseUrl>https://api.codacy.com</codacyApiBaseUrl>
-                            <failOnMissingReportFile>false</failOnMissingReportFile>
+                            <failOnMissingReportFile>true</failOnMissingReportFile>
                         </configuration>
                         <executions>
                             <execution>

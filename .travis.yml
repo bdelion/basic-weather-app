@@ -3,6 +3,7 @@ env:
   global:
     - CODECOV_TOKEN="f095166d-5a9b-4a1a-ada5-97a227937eae"
     - CC_TEST_REPORTER_ID="642ea9f3c58c93cf5dcb6287099228ac278dd9095311feebf2c041756875bd32"
+    - CODACY_PROJECT_TOKEN="e150ffd07c32435893bb6902d28fb555"
 language: java
 jdk:
   - oraclejdk8
@@ -10,6 +11,9 @@ cache:
   directories:
   - $HOME/.m2
 install: true
+before_install:
+  - sudo apt-get install jq
+  - wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r '.assets[0].browser_download_url')
 #For Code Climate Test Coverage
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
@@ -22,6 +26,8 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
 #For Coveralls Test Coverage
   - mvn clean test jacoco:report cobertura:cobertura coveralls:report
+#For Codacy Test Coverage
+  - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r build/reports/jacoco/test/jacocoTestReport.xml
 after_script:
 #For Code Climate Test Coverage
   - ./cc-test-reporter after-build -d --exit-code $TRAVIS_TEST_RESULT 

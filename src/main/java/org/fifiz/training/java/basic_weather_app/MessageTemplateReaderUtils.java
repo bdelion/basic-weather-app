@@ -9,7 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Classe de lecture des messages à partir d'un template
+ * Classe de lecture des messages à partir d'un template.
  * 
  * @author bertrand
  */
@@ -28,9 +28,6 @@ public final class MessageTemplateReaderUtils {
     public static String read() {
         // ouverture du fichier
         InputStream inS = Thread.currentThread().getContextClassLoader().getResourceAsStream("result.tpl");
-        // [TODEL]
-        LOG.info("Ouverture Stream");
-
         // ouverture buffer pour lecture
         String resultat = "";
         BufferedReader buffer = null;

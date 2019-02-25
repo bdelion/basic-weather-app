@@ -30,7 +30,7 @@ class WeatherApp {
         // To run this application from the command line, try:
         // java -jar javaBasicTraining.jar
 
-        MYLOGGER.info("Start");
+        //TODEL MYLOGGER.info("Start");
 
         // On demande à l'utilisateur de saisir le code postal de la ville dont il veut
         // la météo
@@ -42,10 +42,10 @@ class WeatherApp {
         // OwmClient owmc = new OwmClient(codePostal);
         String urlApiOwm = "http://api.openweathermap.org/data/2.5/weather?zip={codePostal},fr&APPID=8c05dfed7d5d0d8ba3a2bc70b83b227f";
 
-        MYLOGGER.info("codePostal : " + codePostal);
-        MYLOGGER.info("urlApiOwm : " + urlApiOwm);
+        //TODEL MYLOGGER.info("codePostal : " + codePostal);
+        //TODEL MYLOGGER.info("urlApiOwm : " + urlApiOwm);
         urlApiOwm = urlApiOwm.replace("{codePostal}", codePostal);
-        MYLOGGER.info("urlApiOwm.replace : " + urlApiOwm);
+        //TODEL MYLOGGER.info("urlApiOwm.replace : " + urlApiOwm);
 
         URL owmUrlClient = new URL(urlApiOwm);
         OwmClient owmc = new OwmClient(owmUrlClient);

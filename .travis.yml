@@ -18,7 +18,8 @@ before_script:
   - ./cc-test-reporter before-build
 
 script:
-  - mvn clean install
+  - mvn clean cobertura:cobertura
+  - mvn install -Dmaven.test.skip=true
 
 after_success:
 #For Code Climate Test Coverage

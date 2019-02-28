@@ -21,15 +21,9 @@ script:
   - mvn clean install
 
 after_script:
-#For Code Climate Test Coverage
   #TODEL - ./cc-test-reporter after-build -t jacoco -p target/site/jacoco/jacoco.xml -d --exit-code $TRAVIS_TEST_RESULT
   #TODEL - ./cc-test-reporter after-build -d -t jacoco --exit-code $? || echo  “Skipping Code Climate coverage upload”
   #TODEL - ./cc-test-reporter after-build -d -t cobertura --exit-code $? || echo  “Skipping Code Climate coverage upload”
-
-  #Solution from https://github.com/codeclimate/test-reporter/issues/259#issuecomment-374280649
-  #- JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter format-coverage target/site/jacoco/jacoco.xml --input-type jacoco
-  - JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter format-coverage -d --input-type cobertura --exit-code $TRAVIS_TEST_RESULT
-  - ./cc-test-reporter upload-coverage -d
 
 
 # Pipe the coverage data to Code Climate
@@ -40,5 +34,11 @@ after_script:
 #TODEL   - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter upload-coverage; fi  # Upload coverage/codeclimate.json
 
 after_success:
+#For Code Climate Test Coverage
+  #Solution from https://github.com/codeclimate/test-reporter/issues/259#issuecomment-374280649
+  #- JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter format-coverage target/site/jacoco/jacoco.xml --input-type jacoco
+  - JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter format-coverage -d --input-type cobertura
+  - ./cc-test-reporter upload-coverage -d
+
 #For Codecov Test Coverage
   - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"

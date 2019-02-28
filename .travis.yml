@@ -20,8 +20,11 @@ before_script:
 script:
   - mvn clean install
 
-after_success:
+after_script:
 #For Code Climate Test Coverage
-  - ./cc-test-reporter after-build -t jacoco -p target/site/jacoco/jacoco.xml -d --exit-code $TRAVIS_TEST_RESULT
+  #TODEL - ./cc-test-reporter after-build -t jacoco -p target/site/jacoco/jacoco.xml -d --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build -t jacoco --exit-code $? || echo  “Skipping Code Climate coverage upload”
+
+after_success:
 #For Codecov Test Coverage
   - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"

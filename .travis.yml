@@ -19,9 +19,18 @@ before_script:
 
 script:
   - mvn clean install
-
+  
 after_success:
 #For Code Climate Test Coverage
-  - ./cc-test-reporter after-build -t jacoco -p target/site/jacoco/jacoco.xml -d --exit-code $TRAVIS_TEST_RESULT
+  #Solution from https://github.com/codeclimate/test-reporter/issues/259#issuecomment-374280649
+  # Format jacoco coverage result
+  - JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter format-coverage --input-type jacoco -o coverage/codeclimate.jacoco.json target/site/jacoco/jacoco.xml
+  # Format cobertura coverage result
+  - ./cc-test-reporter format-coverage --input-type cobertura -o coverage/codeclimate.cobertura.json target/site/cobertura/coverage.xml
+  # Sum both coverage parts into coverage/codeclimate.json
+  - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 2
+  # Upload coverage/codeclimate.json
+  - ./cc-test-reporter upload-coverage
+
 #For Codecov Test Coverage
   - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"

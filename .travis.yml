@@ -37,7 +37,7 @@ after_success:
 #For Code Climate Test Coverage
   #Solution from https://github.com/codeclimate/test-reporter/issues/259#issuecomment-374280649
   #- JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter format-coverage target/site/jacoco/jacoco.xml --input-type jacoco
-  - JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter format-coverage -d --input-type cobertura
+  - JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter format-coverage target/site/cobertura/coverage.xml --input-type cobertura
   - ./cc-test-reporter upload-coverage -d
 
 #For Codecov Test Coverage

@@ -19,31 +19,18 @@ before_script:
 
 script:
   - mvn clean install
-
-after_script:
-  #TODEL - ./cc-test-reporter after-build -t jacoco -p target/site/jacoco/jacoco.xml -d --exit-code $TRAVIS_TEST_RESULT
-  #TODEL - ./cc-test-reporter after-build -d -t jacoco --exit-code $? || echo  “Skipping Code Climate coverage upload”
-  #TODEL - ./cc-test-reporter after-build -d -t cobertura --exit-code $? || echo  “Skipping Code Climate coverage upload”
-
-
-# Pipe the coverage data to Code Climate
-#TODEL after_script:
-#TODEL   - ./cc-test-reporter format-coverage -t simplecov -o coverage/codeclimate.backend.json coverage/backend/.resultset.json # Format backend coverage
-#TODEL   - ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.frontend.json coverage/frontend/lcov.info  # Format frontend coverage
-#TODEL   - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 2                  # Sum both coverage parts into coverage/codeclimate.json
-#TODEL   - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter upload-coverage; fi  # Upload coverage/codeclimate.json
-
+  
 after_success:
 #For Code Climate Test Coverage
   #Solution from https://github.com/codeclimate/test-reporter/issues/259#issuecomment-374280649
   # Format jacoco coverage result
-  - JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter format-coverage --input-type jacoco -o coverage/codeclimate.jacoco.json target/site/jacoco/jacoco.xml
+  - JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter format-coverage --input-type jacoco -o coverage/codeclimate.jacoco.json target/site/jacoco/jacoco.xml --exit-code $? || echo  “Skipping Code Climate jacoco format coverage”
   # Format cobertura coverage result
-  - ./cc-test-reporter format-coverage --input-type cobertura -o coverage/codeclimate.cobertura.json target/site/cobertura/coverage.xml
+  - ./cc-test-reporter format-coverage --input-type cobertura -o coverage/codeclimate.cobertura.json target/site/cobertura/coverage.xml --exit-code $? || echo  “Skipping Code Climate cobertura format coverage”
   # Sum both coverage parts into coverage/codeclimate.json
-  - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 2
+  - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 2 --exit-code $? || echo  “Skipping Code Climate sum coverage”
   # Upload coverage/codeclimate.json
-  - ./cc-test-reporter upload-coverage
-  
+  - ./cc-test-reporter upload-coverage --exit-code $? || echo  “Skipping Code Climate coverage upload”
+
 #For Codecov Test Coverage
   - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"

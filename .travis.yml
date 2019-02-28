@@ -27,8 +27,17 @@ after_script:
   #TODEL - ./cc-test-reporter after-build -d -t cobertura --exit-code $? || echo  “Skipping Code Climate coverage upload”
 
   #Solution from https://github.com/codeclimate/test-reporter/issues/259#issuecomment-374280649
-  - JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter format-coverage target/site/jacoco/jacoco.xml --input-type jacoco
-  - ./cc-test-reporter upload-coverage
+  #- JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter format-coverage target/site/jacoco/jacoco.xml --input-type jacoco
+  - JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter format-coverage -d --input-type cobertura --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter upload-coverage -d
+
+
+# Pipe the coverage data to Code Climate
+#TODEL after_script:
+#TODEL   - ./cc-test-reporter format-coverage -t simplecov -o coverage/codeclimate.backend.json coverage/backend/.resultset.json # Format backend coverage
+#TODEL   - ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.frontend.json coverage/frontend/lcov.info  # Format frontend coverage
+#TODEL   - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 2                  # Sum both coverage parts into coverage/codeclimate.json
+#TODEL   - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter upload-coverage; fi  # Upload coverage/codeclimate.json
 
 after_success:
 #For Codecov Test Coverage

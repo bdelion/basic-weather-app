@@ -133,28 +133,10 @@
                 <version>2.7</version>
                 <configuration>
                     <format>xml</format>
-                    <format>html</format>
-                    <maxmem>256m</maxmem>
-                    <!-- aggregated reports for multi-module projects -->
-                    <aggregate>true</aggregate>
                 </configuration>
                 <executions>
                     <execution>
-                        <id>cobertura-clean</id>
-                        <phase>pre-site</phase>
-                        <goals>
-                            <goal>clean</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>cobertura-site</id>
-                        <phase>site</phase>
-                        <goals>
-                            <goal>cobertura</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>cobertura-test</id>
+                        <id>cobertura-reporting</id>
                         <phase>test</phase>
                         <goals>
                             <goal>cobertura</goal>

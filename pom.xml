@@ -37,7 +37,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <codacy-api-token>iORaPgvl6OEVY3UfnsoL</codacy-api-token>
-        <codecy-project-token>e150ffd07c32435893bb6902d28fb555</codecy-project-token>
+        <codacy-project-token>e150ffd07c32435893bb6902d28fb555</codacy-project-token>
         <coveralls-repo-token>VdPhmjc9brgL7RKjVLV4JX8IOtkxwxNxd</coveralls-repo-token>
     </properties>
     <!-- Liste des dependances -->
@@ -329,7 +329,7 @@
                         <version>1.0.3</version>
                         <configuration>
                             <apiToken>${codacy-api-token}</apiToken>
-                            <projectToken>${codecy-project-token}</projectToken>
+                            <projectToken>${codacy-project-token}</projectToken>
                             <language>Java</language>
                             <coverageReportFile>${project.reporting.outputDirectory}/jacoco/jacoco.xml</coverageReportFile>
                             <commit>${env.TRAVIS_COMMIT}</commit>

@@ -10,6 +10,8 @@ Codecov
 [![codecov](https://codecov.io/gh/bdelion/basic-weather-app/branch/master/graph/badge.svg)](https://codecov.io/gh/bdelion/basic-weather-app)  
 CoverAlls  
 [![Coverage Status](https://coveralls.io/repos/github/bdelion/basic-weather-app/badge.svg?branch=master)](https://coveralls.io/github/bdelion/basic-weather-app?branch=master)  
+Sourcerer  
+[![Sourcerer](https://sourcerer.io/icons/logo-sharing.svg)](https://sourcerer.io/bdelion)  
 
 # basic-weather-app
 

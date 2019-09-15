@@ -66,7 +66,7 @@ public class OwmClientTest {
 
         OwmClient client = new OwmClient("49000");
         WeatherResult weatherResult = client.getWeather();
-        assertEquals("Angers", weatherResult.getName());
+        assertEquals("Écouflant", weatherResult.getName());
     }
 
     @Test(expected = TechnicalException.class)

@@ -21,11 +21,14 @@ script:
   - mvn -U clean compile -Pproject-controls-check --file pom.xml --settings .github/workflows/settings.xml
   - mvn -U -Dmaven.main.skip test --file pom.xml --settings .github/workflows/settings.xml
   - mvn -U -Dmaven.main.skip -Dunit.test.skip verify --file pom.xml --settings .github/workflows/settings.xml
-  - mvn -U -Dmaven.main.skip -Dunit.test.skip -Dverify.skip jar:jar@default-jar assembly:single@make-assembly source:jar-no-fork@attach-sources javadoc:jar@attach-javadocs deploy --file pom.xml --settings .github/workflows/settings.xml
-  - mvn -U site --file pom.xml --settings .github/workflows/settings.xml
 
+  - mvn sonar:sonar -Dsonar.projectKey=bdelion_basic-weather-app -Dsonar.organization=bdelion-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=b16096495b907a3c04d8b8bffb63f2e1d44311e9
+
+  - mvn -U -Dmaven.main.skip -Dunit.test.skip -Dverify.skip jar:jar@default-jar assembly:single@make-assembly source:jar-no-fork@attach-sources javadoc:jar@attach-javadocs install --file pom.xml --settings .github/workflows/settings.xml
+  - mvn -U site --file pom.xml --settings .github/workflows/settings.xml
+  
 after_success:
-  #For Code Climate Test Coverage
+#For Code Climate Test Coverage
   #Solution from https://github.com/codeclimate/test-reporter/issues/259#issuecomment-374280649
   # Format jacoco coverage result
   - JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter format-coverage --input-type jacoco -o coverage/codeclimate.jacoco.json target/site/jacoco/jacoco.xml
@@ -36,5 +39,5 @@ after_success:
   # Upload coverage/codeclimate.json
   - ./cc-test-reporter upload-coverage
 
-  #For Codecov Test Coverage
+#For Codecov Test Coverage
   - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"

@@ -43,7 +43,7 @@ public final class MessageTemplateReaderUtils {
                 MYLOGGER.error("Oups ! Pb à la lecture du flux.", io);
             } finally {
                 try {
-                    inS.close();
+                        inS.close();
                     MYLOGGER.info("Fermeture Stream");
                 } catch (IOException ex) {
                     MYLOGGER.error("Oups ! Pb à la fermeture du flux.", ex);

@@ -51,10 +51,10 @@ Pour exécuter localement `basic-weather-app`, il faut :
     Localisation : longitude : -1.55 / latitude : 47.22
     ================
     Temps : Clouds / overcast clouds
-    TempÃ©rature : 11,73 °C
-    TempÃ©rature min : 11,00 °C
-    TempÃ©rature max : 13,00 °C
-    HumiditÃ© : 93,00
+    Température : 11,73 °C
+    Température min : 11,00 °C
+    Température max : 13,00 °C
+    Humidité : 93,00
     Vent : 4,60 m/sec
 
     =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

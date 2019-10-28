@@ -31,10 +31,16 @@
             <id>bdelion</id>
         </developer>
     </developers>
+
     <!-- Liste des proprietes -->
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.compiler.testSource>${java.version}</maven.compiler.testSource>
+        <maven.compiler.testTarget>${java.version}</maven.compiler.testTarget>
+        <main.class>org.fifiz.training.java.basicweatherapp.BasicWeatherAppApplication</main.class>
     </properties>
 
     <!-- Liste des dependances -->
@@ -55,6 +61,12 @@
             <version>2.11.2</version>
         </dependency>
         -->
+        <!-- Pour Json -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.10.0</version>
+        </dependency>
         <!-- Pour les TU -->
         <dependency>
             <groupId>junit</groupId>
@@ -67,43 +79,35 @@
     <!-- Configuration de la construction des livrables -->
     <build>
         <plugins>
-            <!-- Goal qui copie les dépendances du projet du référentiel vers un emplacement défini. -->
+            <!-- Construction d'un fichier JAR (Java Archive) executable à partir des ressources et des classes de projet compilées. -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
+                <artifactId>maven-assembly-plugin</artifactId>
                 <version>3.1.1</version>
                 <executions>
                     <execution>
-                        <id>copy-dependencies</id>
+                        <!-- this is used for inheritance merges -->
+                        <id>make-assembly</id>
+                        <!-- bind to the packaging phase -->
                         <phase>package</phase>
                         <goals>
-                            <goal>copy-dependencies</goal>
+                            <goal>single</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/dependency-jars/</outputDirectory>
-                            <overWriteReleases>false</overWriteReleases>
-                            <overWriteSnapshots>true</overWriteSnapshots>
-                            <overWriteIfNewer>true</overWriteIfNewer>
+                            <!-- MainClass in manifest make a executable jar -->
+                            <archive>
+                                <manifest>
+                                    <mainClass>${main.class}</mainClass>
+                                </manifest>
+                            </archive>
+                            <!-- Get all project dependencies -->
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
-            <!-- Goal qui construit un fichier JAR (Java Archive) executable à partir des ressources et des classes de projet compilées. -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.1</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>dependency-jars/</classpathPrefix>
-                            <mainClass>org.fifiz.training.java.basicweatherapp.BasicWeatherAppApplication</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
-
 </project>

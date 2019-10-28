@@ -14,7 +14,7 @@ public class BasicWeatherAppApplicationTests {
      */
 	@Test
 	void contextLoads() {
-		org.junit.Assert.assertTrue( true );
+		assertTrue( true );
 	}
 
 }

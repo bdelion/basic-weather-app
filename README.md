@@ -1,6 +1,6 @@
 # Welcome to basic-weather-app 👋
 
-[![Version](https://img.shields.io/badge/version-0.0.1-blue.svg?cacheSeconds=2592000)](https://img.shields.io/badge/version-0.0.1-SNAPSHOT-blue.svg?cacheSeconds=2592000) [![Documentation](https://img.shields.io/badge/documentation-yes-brightgreen.svg)](https://github.com/bdelion/basic-weather-app/wiki) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
+[![HitCount](http://hits.dwyl.io/bdelion/basic-weather-app.svg)](http://hits.dwyl.io/bdelion/basic-weather-app) [![Version](https://img.shields.io/badge/version-0.0.1-blue.svg?cacheSeconds=2592000)](https://img.shields.io/badge/version-0.0.1-SNAPSHOT-blue.svg?cacheSeconds=2592000) [![Documentation](https://img.shields.io/badge/documentation-yes-brightgreen.svg)](https://github.com/bdelion/basic-weather-app/wiki) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
 
 [![Build Status](https://travis-ci.com/bdelion/basic-weather-app.svg?branch=master)](https://travis-ci.com/bdelion/basic-weather-app)  
 
@@ -14,6 +14,8 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/bdelion/basic-weather-app/badge.svg?branch=master)](https://coveralls.io/github/bdelion/basic-weather-app?branch=master)
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bdelion_basic-weather-app&metric=alert_status)](https://sonarcloud.io/dashboard?id=bdelion_basic-weather-app) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=bdelion_basic-weather-app&metric=coverage)](https://sonarcloud.io/dashboard?id=bdelion_basic-weather-app) [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=bdelion_basic-weather-app&metric=ncloc)](https://sonarcloud.io/dashboard?id=bdelion_basic-weather-app) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=bdelion_basic-weather-app&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=bdelion_basic-weather-app) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=bdelion_basic-weather-app&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=bdelion_basic-weather-app) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=bdelion_basic-weather-app&metric=security_rating)](https://sonarcloud.io/dashboard?id=bdelion_basic-weather-app) [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=bdelion_basic-weather-app&metric=sqale_index)](https://sonarcloud.io/dashboard?id=bdelion_basic-weather-app) [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=bdelion_basic-weather-app&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=bdelion_basic-weather-app)
+
 <p>
 <a href="https://sourcerer.io/bdelion"><img src="https://sourcerer.io/icons/logo-sharing.svg"height="24px" alt="Sourcerer"></a>
 </p>
@@ -24,7 +26,7 @@
 > 
 > Cette application fait appel à l'API [Current weather data de openweathermap](https://openweathermap.org/current)
 
-### 🏠 [Homepage](https://github.com/bdelion/basic-weather-app)
+### 🏠 [Homepage](https://github.com/bdelion/basic-weather-app/tree/master)
 
 ## Usage
 
@@ -58,13 +60,26 @@ Pour exécuter localement `basic-weather-app`, il faut :
     =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     ```
 
-## Author
+## Fabriqué avec
+
+* [Visual Studio Code](https://code.visualstudio.com/) - Editeur de code source.
+* [Maven](https://maven.apache.org/) - Outil de gestion et d'automatisation de production des projets logiciels.
+* [Travis CI](https://travis-ci.com/) - Logiciel libre d'intégration continue.
+* [Codacy](https://www.codacy.com/) - Outil d'analyse de code : qualité, compléxité, duplication et taux de couverture des tests unitaires.
+* [Code Climate / Quality](https://codeclimate.com/quality/) - Outil d'analyse de code : qualité, maintenabilité, duplication et taux de couverture des tests unitaires.
+* [Code Coverage](https://codecov.io/) - Outil d'analyse de la couverture de tests.
+* [Coveralls](https://coveralls.io/) - Outil d'analyse de la couverture de tests.
+* [SonarCloud](https://sonarcloud.io/about) - Service en ligne d'analyse de qualité et de sécurité du code.
+
+## Authors
 
 👤 **Bertrand DELION**
 
 * Github: [@bdelion](https://github.com/bdelion)
 
-## Journal des modifications
+Voir aussi la liste des [contributeurs](https://github.com/bdelion/basic-weather-app/graphs/contributors) ayant participés à ce projet.
+
+## :books: Journal des modifications
 
 Pour connaître les dernières évolutions et leurs impacts, consuler la page [CHANGELOG](CHANGELOG.md)
 
@@ -72,8 +87,6 @@ Pour connaître les dernières évolutions et leurs impacts, consuler la page [C
 
 Les contributions, problèmes et demandes de fonctionnalités sont les bienvenus !
 N'hésitez pas à consulter la page des [issues](https://github.com/bdelion/basic-weather-app/issues), et à ouvrir une `issue` afin de discuter de ce que vous souhaitez modifier.
-
-Voir aussi la liste des [contributeurs](https://github.com/bdelion/basic-weather-app/graphs/contributors) ayant participé à ce projet.
 
 ## Versioning
 

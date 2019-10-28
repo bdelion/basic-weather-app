@@ -1,3 +1,7 @@
+HELP.md
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
 
 # Created by https://www.gitignore.io/api/git,java,maven,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=git,java,maven,visualstudiocode
@@ -54,6 +58,29 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 .flattened-pom.xml
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
 
 ### VisualStudioCode ###
 .vscode/*

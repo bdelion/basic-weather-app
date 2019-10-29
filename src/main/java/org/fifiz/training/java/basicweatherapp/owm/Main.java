@@ -1,6 +1,5 @@
 package org.fifiz.training.java.basicweatherapp.owm;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -74,7 +73,7 @@ public class Main {
         return this.grndLevel;
     }
 
-    public void setGrnd_level(Double grndLevel) {
+    public void setGrndLevel(Double grndLevel) {
         this.grndLevel = grndLevel;
     }
 }

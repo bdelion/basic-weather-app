@@ -40,6 +40,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven.compiler.testSource>${java.version}</maven.compiler.testSource>
         <maven.compiler.testTarget>${java.version}</maven.compiler.testTarget>
+        <junit.jupiter.version>5.5.2</junit.jupiter.version>
         <main.class>org.fifiz.training.java.basicweatherapp.BasicWeatherAppApplication</main.class>
     </properties>
 
@@ -61,7 +62,7 @@
             <version>2.11.2</version>
         </dependency>
         -->
-        <!-- Pour Json -->
+        <!-- Pour Json, dépendance aussi dans wiremock -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
@@ -71,7 +72,19 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.13-beta-2</version>
+            <version>4.13-rc-1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock</artifactId>
+            <version>2.25.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -79,6 +92,13 @@
     <!-- Configuration de la construction des livrables -->
     <build>
         <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+            </plugin>
+
             <!-- Construction d'un fichier JAR (Java Archive) executable à partir des ressources et des classes de projet compilées. -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

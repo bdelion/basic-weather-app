@@ -68,4 +68,26 @@ public class WeatherResultTest {
       
       assertEquals("Mauvais code retour", new Integer("404"), fromFile.getCod());
   }
+
+  @Test
+  public void whenReadRainData_thanCorrect() throws Exception {
+      File resource = new File("src/test/resources/owm_data_rain.json");
+
+      WeatherResult fromFile = objectMapper.readValue(resource, WeatherResult.class);
+
+      assertEquals("Rain", fromFile.getWeather().get(0).getMain());
+      assertEquals("légère pluie", fromFile.getWeather().get(0).getDescription());
+      assertEquals(new Double("0.25"), fromFile.getRain().getOneHour());
+  }
+
+  @Test
+  public void whenReadRainSnow_thanCorrect() throws Exception {
+      File resource = new File("src/test/resources/owm_data_snow.json");
+
+      WeatherResult fromFile = objectMapper.readValue(resource, WeatherResult.class);
+
+      assertEquals("Snow", fromFile.getWeather().get(0).getMain());
+      assertEquals("légères chutes de neige", fromFile.getWeather().get(0).getDescription());
+      assertEquals(new Double("0.13"), fromFile.getSnow().getThreeHour());
+  }
 }

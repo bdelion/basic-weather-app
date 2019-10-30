@@ -53,7 +53,7 @@ public class OwmClient {
      * @throws MalformedURLException
      */
     public OwmClient(String codePostal) throws MalformedURLException {
-        String urlApiOwm = "http://api.openweathermap.org/data/2.5/weather?zip={codePostal},fr&APPID=8c05dfed7d5d0d8ba3a2bc70b83b227f";
+        String urlApiOwm = "http://api.openweathermap.org/data/2.5/weather?zip={codePostal},fr&units=metric&lang=fr&APPID=8c05dfed7d5d0d8ba3a2bc70b83b227f";
 
         LOG.info("STRING codePostal : " + codePostal);
         LOG.info("STRING urlApiOwm : " + urlApiOwm);

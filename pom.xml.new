@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!-- Version du fichier -->
+    <modelVersion>4.0.0</modelVersion>
+    <!-- Definition de l'artefact -->
+    <groupId>org.fifiz.training.java</groupId>
+    <artifactId>basic-weather-app</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>basic-weather-app</name>
+    <description>Application Java basique et autonome donnant la météo pour un code postal en France</description>
+    <!-- FIXME change it to the project's website -->
+    <url>https://bdelion.github.io/basic-weather-app/</url>
+    <!-- Gestionnaire de code source -->
+    <!-- https://github.com/kevinsawicki/github-maven-example/blob/master/example/pom.xml -->
+    <scm>
+        <url>https://github.com/bdelion/basic-weather-app</url>
+        <connection>scm:git:git://github.com/bdelion/basic-weather-app.git</connection>
+        <developerConnection>scm:git:git@github.com:bdelion/basic-weather-app.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+    <issueManagement>
+        <url>https://github.com/bdelion/basic-weather-app/issues</url>
+        <system>GitHub Issues</system>
+    </issueManagement>
+    <developers>
+        <developer>
+            <email>bertrand.delion@free.fr</email>
+            <name>Bertrand Delion</name>
+            <url>https://github.com/bdelion</url>
+            <id>bdelion</id>
+        </developer>
+    </developers>
+
+    <!-- Liste des proprietes -->
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.compiler.testSource>${java.version}</maven.compiler.testSource>
+        <maven.compiler.testTarget>${java.version}</maven.compiler.testTarget>
+        <junit.jupiter.version>5.5.2</junit.jupiter.version>
+        <main.class>org.fifiz.training.java.basicweatherapp.BasicWeatherAppApplication</main.class>
+    </properties>
+
+    <!-- Liste des dependances -->
+    <dependencies>
+        <!-- Pour les logs -->
+        <!-- mvn dependency:analyze -DignoreNonCompile=true -> Unused declared dependencies found:
+        -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.11.2</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- mvn dependency:analyze -DignoreNonCompile=true -> Used undeclared dependencies found:
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.11.2</version>
+        </dependency>
+        -->
+        <!-- Pour Json, dépendance aussi dans wiremock -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.10.0</version>
+        </dependency>
+        <!-- Pour les TU -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13-rc-1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock</artifactId>
+            <version>2.25.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- Configuration de la construction des livrables -->
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+            </plugin>
+
+            <!-- Construction d'un fichier JAR (Java Archive) executable à partir des ressources et des classes de projet compilées. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <!-- this is used for inheritance merges -->
+                        <id>make-assembly</id>
+                        <!-- bind to the packaging phase -->
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <!-- MainClass in manifest make a executable jar -->
+                            <archive>
+                                <manifest>
+                                    <mainClass>${main.class}</mainClass>
+                                </manifest>
+                            </archive>
+                            <!-- Get all project dependencies -->
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

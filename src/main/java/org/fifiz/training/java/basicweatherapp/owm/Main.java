@@ -3,7 +3,7 @@ package org.fifiz.training.java.basicweatherapp.owm;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Classe principale.
+ * Classe principale des données météo de http://api.openweathermap.org.
  *
  * @author bertrand
  */

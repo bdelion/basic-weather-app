@@ -1,7 +1,7 @@
 package org.fifiz.training.java.basicweatherapp.owm;
 
 /**
- * Classe vent.
+ * Classe des données sur le vent de http://api.openweathermap.org.
  * @author bertrand
  */
 public class Wind {

@@ -1,7 +1,7 @@
 package org.fifiz.training.java.basicweatherapp.owm;
 
 /**
- * Class météo.
+ * Class résumé des données météo de http://api.openweathermap.org.
  * @author bertrand
  */
 public class Weather {

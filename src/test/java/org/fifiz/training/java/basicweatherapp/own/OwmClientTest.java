@@ -27,6 +27,8 @@ public class OwmClientTest {
   //
   private static final String LOCAL_URL = "http://localhost:{port}{path}";
   //
+  private static final String LOCAL_URL_MALFORMED = "http://localhost-{port}{path}";
+  //
   private static final String LOCAL_URL_PATH = "{path}";
   //
   private static final String LOCAL_URL_PORT = "{port}";
@@ -40,34 +42,85 @@ public class OwmClientTest {
   // 0 to dynamic port
   public WireMockRule wireMR = new WireMockRule(0);
 
-  @Test(expected = TechnicalException.class)
-  public void whenBadURL_thanHttpNotFound() throws IOException {
-    // TODEL (new WeatherStub(WEATHER_API_PATH, Response.SC_NOT_FOUND)).stub();
+  @Test
+  public void testCouldNotConnectToClientIfUrlIsMalformed() throws IOException {
     (new WeatherResultStub(WEATHER_API_PATH, HttpURLConnection.HTTP_NOT_FOUND)).stub();
-    OwmClient client = new OwmClient(new URL(
-        LOCAL_URL.replace(LOCAL_URL_PORT, String.valueOf(wireMR.port())).replace(LOCAL_URL_PATH, WEATHER_API_PATH)));
-    client.getWeather();
-  }
-
-  @Test // (expected = TechnicalException.class)
-  public void whenCityNotFound_thanHttpNotFound() throws IOException {
-    (new WeatherResultStub(WEATHER_API_PATH, HttpURLConnection.HTTP_NOT_FOUND, OWN_RESULT_CITY_NOT_FOUND)).stub();
-    OwmClient client = new OwmClient(new URL(
-        LOCAL_URL.replace(LOCAL_URL_PORT, String.valueOf(wireMR.port())).replace(LOCAL_URL_PATH, WEATHER_API_PATH)));
+    OwmClient client = new OwmClient(new URL(LOCAL_URL_MALFORMED.replace(LOCAL_URL_PORT, String.valueOf(wireMR.port()))
+        .replace(LOCAL_URL_PATH, WEATHER_API_PATH)));
     try {
       WeatherResult weatherResult = client.getWeather();
-      fail("Should of thrown an TechnicalException");
-    } catch (TechnicalException aExp) {
-      assert (aExp.getMessage()
-          .contains("Statut de la réponse invalide (code retour = '404' / message = 'Not Found')"));
+      fail("Should of thrown an MalformedURLException");
+    } catch (TechnicalException ex) {
+      assertEquals("Oups ! Impossible de se connecter à l'URL fournie par le client.", ex.getMessage());
     }
   }
 
   @Test
-  public void whenCityFound_thanResultOk() throws IOException {
+  public void testJsonReturnIfCityNotFound() throws IOException {
+    (new WeatherResultStub(WEATHER_API_PATH, HttpURLConnection.HTTP_OK, OWN_RESULT_CITY_NOT_FOUND)).stub();
+    OwmClient client = new OwmClient(new URL(
+        LOCAL_URL.replace(LOCAL_URL_PORT, String.valueOf(wireMR.port())).replace(LOCAL_URL_PATH, WEATHER_API_PATH)));
+
+    WeatherResult weatherResult = null;
+
+    weatherResult = client.getWeather();
+    assertEquals(new Integer("404"), weatherResult.getCod());
+    assertEquals("city not found", weatherResult.getMessage());
+  }
+
+  @Test
+  public void testTechnicalExceptionIfCityNotFound() throws IOException {
+    (new WeatherResultStub(WEATHER_API_PATH, HttpURLConnection.HTTP_NOT_FOUND, OWN_RESULT_CITY_NOT_FOUND)).stub();
+    OwmClient client = new OwmClient(new URL(
+        LOCAL_URL.replace(LOCAL_URL_PORT, String.valueOf(wireMR.port())).replace(LOCAL_URL_PATH, WEATHER_API_PATH)));
+
+    try {
+      client.getWeather();
+      fail("Should of thrown an TechnicalException");
+    } catch (TechnicalException ex) {
+      assertEquals("Statut de la réponse invalide (code retour = '" + HttpURLConnection.HTTP_NOT_FOUND
+          + "' / message = 'Not Found')", ex.getMessage());
+    }
+  }
+
+  @Test
+  public void testResultReturnIfCityFoundByUrl() throws IOException {
     (new WeatherResultStub(WEATHER_API_PATH, HttpURLConnection.HTTP_OK, OWN_RESULT_OK)).stub();
     OwmClient client = new OwmClient(new URL(
         LOCAL_URL.replace(LOCAL_URL_PORT, String.valueOf(wireMR.port())).replace(LOCAL_URL_PATH, WEATHER_API_PATH)));
+    WeatherResult weatherResult = client.getWeather();
+
+    assertEquals(new Integer("0"), weatherResult.getId());
+    assertEquals("Paris", weatherResult.getName());
+    assertEquals(new Integer("200"), weatherResult.getCod());
+    assertEquals("stations", weatherResult.getBase());
+    assertEquals(new Integer("10000"), weatherResult.getVisibility());
+    assertEquals(new Integer("1572333005"), weatherResult.getDt());
+    assertEquals(new Float("48.85"), weatherResult.getCoord().getLat());
+    assertEquals(new Float("2.35"), weatherResult.getCoord().getLon());
+    assertEquals("500", weatherResult.getWeather().get(0).getId());
+    assertEquals("Rain", weatherResult.getWeather().get(0).getMain());
+    assertEquals("light rain", weatherResult.getWeather().get(0).getDescription());
+    assertEquals("10d", weatherResult.getWeather().get(0).getIcon());
+    assertEquals(new Double("280.69"), weatherResult.getMain().getTemp());
+    assertEquals(new Double("1020"), weatherResult.getMain().getPressure());
+    assertEquals(new Double("87"), weatherResult.getMain().getHumidity());
+    assertEquals(new Double("279.82"), weatherResult.getMain().getTempMin());
+    assertEquals(new Double("281.48"), weatherResult.getMain().getTempMax());
+    assertEquals(new Double("4.1"), weatherResult.getWind().getSpeed());
+    assertEquals(new Double("40"), weatherResult.getWind().getDeg());
+    assertEquals(new Integer("100"), weatherResult.getClouds().getAll());
+    assertEquals(new Integer("1"), weatherResult.getSys().getType());
+    assertEquals(new Integer("6550"), weatherResult.getSys().getId());
+    assertEquals("FR", weatherResult.getSys().getCountry());
+    assertEquals(new Integer("1572330714"), weatherResult.getSys().getSunrise());
+    assertEquals(new Integer("1572366995"), weatherResult.getSys().getSunset());
+  }
+
+  @Test
+  public void testResultReturnIfCityFoundByZipCode() throws IOException {
+    (new WeatherResultStub(WEATHER_API_PATH, HttpURLConnection.HTTP_OK, OWN_RESULT_OK)).stub();
+    OwmClient client = new OwmClient("79430");
     WeatherResult weatherResult = client.getWeather();
 
     assertEquals(new Integer("0"), weatherResult.getId());

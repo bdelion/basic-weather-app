@@ -11,6 +11,7 @@ public class WeatherResult {
     private Integer id;
     private String name;
     private Integer cod;
+    private String message;
     private String base;
     private Integer visibility;
     private Integer dt;
@@ -46,6 +47,14 @@ public class WeatherResult {
 
     public void setCod(Integer cod) {
         this.cod = cod;
+    }
+
+    public String getMessage() {
+        return this.message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getBase() {

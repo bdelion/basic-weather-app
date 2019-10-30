@@ -28,7 +28,7 @@ public class WeatherResultTest {
   }
 
   @Test
-  public void whenReadFromFile_thanCorrect() throws Exception {
+  public void testDataReturnIfCityFound() throws Exception {
       File resource = new File("src/test/resources/owm_ok.json");
 
       WeatherResult fromFile = objectMapper.readValue(resource, WeatherResult.class);
@@ -61,7 +61,7 @@ public class WeatherResultTest {
   }
 
   @Test
-  public void whenReadFromFile_thanCityNotFound() throws Exception {
+  public void testDataReturnIfCityNotFound() throws Exception {
       File resource = new File("src/test/resources/owm_citynotfound.json");
 
       WeatherResult fromFile = objectMapper.readValue(resource, WeatherResult.class);
@@ -70,7 +70,7 @@ public class WeatherResultTest {
   }
 
   @Test
-  public void whenReadRainData_thanCorrect() throws Exception {
+  public void testRainDataReturnIfCityFound() throws Exception {
       File resource = new File("src/test/resources/owm_data_rain.json");
 
       WeatherResult fromFile = objectMapper.readValue(resource, WeatherResult.class);
@@ -78,16 +78,18 @@ public class WeatherResultTest {
       assertEquals("Rain", fromFile.getWeather().get(0).getMain());
       assertEquals("légère pluie", fromFile.getWeather().get(0).getDescription());
       assertEquals(new Double("0.25"), fromFile.getRain().getOneHour());
+      assertEquals(new Double("0.35"), fromFile.getRain().getThreeHour());
   }
 
   @Test
-  public void whenReadRainSnow_thanCorrect() throws Exception {
+  public void testSnowDataReturnIfCityFound() throws Exception {
       File resource = new File("src/test/resources/owm_data_snow.json");
 
       WeatherResult fromFile = objectMapper.readValue(resource, WeatherResult.class);
 
       assertEquals("Snow", fromFile.getWeather().get(0).getMain());
       assertEquals("légères chutes de neige", fromFile.getWeather().get(0).getDescription());
+      assertEquals(new Double("0.03"), fromFile.getSnow().getOneHour());
       assertEquals(new Double("0.13"), fromFile.getSnow().getThreeHour());
   }
 }

@@ -1,6 +1,7 @@
 package org.fifiz.training.java.basicweatherapp.owm;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -84,16 +85,22 @@ public class OwmClient {
             owmConnection = (HttpURLConnection) this.owmUrlClient.openConnection();
             // sortie en erreur si le code retour est KO <>200
             if (owmConnection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                LOG.warn("Connection response code <> 200: " + owmConnection.getResponseCode());
                 throw new TechnicalException(
                         "Statut de la réponse invalide (code retour = '" + owmConnection.getResponseCode()
                                 + "' / message = '" + owmConnection.getResponseMessage() + "')");
             }
             // pour avoir une sortie structurée du flux : http://json.parser.online.fr/
             weatherResult = this.jsonMapper.readValue(owmConnection.getInputStream(), WeatherResult.class);
+        } catch (ConnectException ex) {
+            LOG.warn("Could not connect to client supplied url: " + this.getOwnUrl(), ex);
+            throw new TechnicalException("Oups ! Impossible de se connecter à l'URL fournie par le client.", ex);
         } catch (MalformedURLException ex) {
-            throw new TechnicalException("Oups ! Pb sur l'URL", ex);
+            LOG.error("Malformed client supplied url: " + this.getOwnUrl(), ex);
+            throw new TechnicalException("Oups ! URL fournie par le client mal formée", ex);
         } catch (IOException ex) {
-            throw new TechnicalException("Oups ! I/O erreur", ex);
+            LOG.warn("Could not connect to client supplied url: " + this.getOwnUrl(), ex);
+            throw new TechnicalException("Oups ! Impossible de se connecter à l'URL fournie par le client.", ex);
         } finally {
             if (owmConnection != null) {
                 owmConnection.disconnect();

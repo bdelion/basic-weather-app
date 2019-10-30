@@ -11,7 +11,6 @@ import org.fifiz.training.java.basicweatherapp.owm.WeatherResult;
 
 public class BasicWeatherAppApplication {
 	private static final Logger MYLOGGER = LogManager.getLogger(BasicWeatherAppApplication.class);
-    private static final Double DELTATEMP = -273.15;
     private static final String FORMATTEMP = "%.2f °C";
     private static final String FORMATSEPARATOR = "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=";
 
@@ -49,9 +48,9 @@ public class BasicWeatherAppApplication {
 						.replace("{lat}", String.valueOf(cpWeather.getCoord().getLat()))
 						.replace("{weather.main}", cpWeather.getWeather().get(0).getMain())
 						.replace("{weather.description}", cpWeather.getWeather().get(0).getDescription())
-						.replace("{temp}", String.format(FORMATTEMP, cpWeather.getMain().getTemp() + DELTATEMP))
-						.replace("{temp-min}", String.format(FORMATTEMP, cpWeather.getMain().getTempMin() + DELTATEMP))
-						.replace("{temp-max}", String.format(FORMATTEMP, cpWeather.getMain().getTempMax() + DELTATEMP))
+						.replace("{temp}", String.format(FORMATTEMP, cpWeather.getMain().getTemp()))
+						.replace("{temp-min}", String.format(FORMATTEMP, cpWeather.getMain().getTempMin()))
+						.replace("{temp-max}", String.format(FORMATTEMP, cpWeather.getMain().getTempMax()))
 						.replace("{humid}", String.format("%.2f", cpWeather.getMain().getHumidity()))
 						.replace("{wind}", String.format("%.2f m/sec", cpWeather.getWind().getSpeed())));
 				System.out.println(FORMATSEPARATOR);

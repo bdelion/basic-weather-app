@@ -34,12 +34,12 @@ public class BasicWeatherAppApplication {
 
 		// appel au service de météo
 		OwmClient owmC = new OwmClient(codePostal);
-		MYLOGGER.info("owmC : " + owmC);
+		MYLOGGER.debug("owmC : " + owmC);
 		try {
 			WeatherResult cpWeather = owmC.getWeather();
-			MYLOGGER.info("cpWeather : " + cpWeather);
+			MYLOGGER.debug("cpWeather : " + cpWeather);
 			String msgTmpl = MessageTemplateReaderUtils.read();
-			MYLOGGER.info("msgTmpl : " + msgTmpl);
+			MYLOGGER.debug("msgTmpl : " + msgTmpl);
 			if (!"".equals(msgTmpl)) {
 				System.out.println(FORMATSEPARATOR);
 				System.out.println(msgTmpl.replace("{city}", cpWeather.getName()).replace("{cp}", codePostal)

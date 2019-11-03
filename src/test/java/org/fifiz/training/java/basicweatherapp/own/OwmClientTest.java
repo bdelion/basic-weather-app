@@ -119,8 +119,12 @@ public class OwmClientTest {
 
   @Test
   public void testResultReturnIfCityFoundByZipCode() throws IOException {
-    (new WeatherResultStub(WEATHER_API_PATH, HttpURLConnection.HTTP_OK, OWN_RESULT_OK)).stub();
-    OwmClient client = new OwmClient("79430");
+    String zipCode = "75000";
+    String apiUrl = "/data/2.5/weather?zip=" + zipCode + ",fr&units=metric&lang=fr&APPID=8c05dfed7d5d0d8ba3a2bc70b83b227f";
+    
+    (new WeatherResultStub(apiUrl, HttpURLConnection.HTTP_OK, OWN_RESULT_OK)).stub();
+    OwmClient client = new OwmClient(zipCode);
+    client.setOwmUrlClient(new URL(LOCAL_URL.replace(LOCAL_URL_PORT, String.valueOf(wireMR.port())).replace(LOCAL_URL_PATH, apiUrl)));
     WeatherResult weatherResult = client.getWeather();
 
     assertEquals(new Integer("0"), weatherResult.getId());

@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <!-- Version du fichier -->
     <modelVersion>4.0.0</modelVersion>
     <!-- POM parent -->
@@ -36,6 +37,9 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <apache.logging.log4j.version>2.12.1</apache.logging.log4j.version>
+
         <codacy-api-token>iORaPgvl6OEVY3UfnsoL</codacy-api-token>
         <codacy-project-token>e150ffd07c32435893bb6902d28fb555</codacy-project-token>
         <coveralls-repo-token>VdPhmjc9brgL7RKjVLV4JX8IOtkxwxNxd</coveralls-repo-token>
@@ -54,26 +58,39 @@
             <version>1.7.5</version>
         </dependency>
         -->
-        <!-- Pour les logs -->
+<!-- Pour les logs -->
         <!-- mvn dependency:analyze -DignoreNonCompile=true -> Unused declared dependencies found:
         -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>2.11.2</version>
+            <version>${apache.logging.log4j.version}</version>
             <scope>compile</scope>
         </dependency>
         <!-- mvn dependency:analyze -DignoreNonCompile=true -> Used undeclared dependencies found:
+        -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
-            <version>2.11.2</version>
+            <version>${apache.logging.log4j.version}</version>
         </dependency>
-        -->
-        <!-- Pour Json -->
+        <!-- SLF4J Bridge -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${apache.logging.log4j.version}</version>
+        </dependency>
+<!-- Pour Json -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
+            <version>2.10.0</version>
+        </dependency>
+        <!-- mvn dependency:analyze -DignoreNonCompile=true -> Used undeclared dependencies found:
+        -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
             <version>2.10.0</version>
         </dependency>
         <!-- Pour les tests -->

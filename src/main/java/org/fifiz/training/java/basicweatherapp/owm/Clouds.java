@@ -1,7 +1,7 @@
-package org.fifiz.training.java.basic_weather_app.owm;
+package org.fifiz.training.java.basicweatherapp.owm;
 
 /**
- * Classe des coordonnées de nébulosité météo de http://api.openweathermap.org.
+ * Classe de la nébulosité de http://api.openweathermap.org.
  * @author bertrand
  */
 public class Clouds {

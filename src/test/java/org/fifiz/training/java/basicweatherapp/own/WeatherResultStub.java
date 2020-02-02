@@ -1,8 +1,8 @@
-package org.fifiz.training.java.basic_weather_app.own;
+package org.fifiz.training.java.basicweatherapp.own;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
-import static com.github.tomakehurst.wiremock.client.WireMock.get;
 import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
+import static com.github.tomakehurst.wiremock.client.WireMock.get;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 
 import java.io.IOException;
@@ -12,33 +12,33 @@ import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
 import org.apache.commons.io.IOUtils;
 
 /**
- * WeatherStub.
+ * WeatherResultStub.
  *
  * @author bertrand
  */
-public class WeatherStub implements StubCase {
+public class WeatherResultStub implements StubCase {
 
     private final String path;
     private final int status;
     private final String jsonFileName;
 
     /**
-     * WeatherStub without json file.
+     * WeatherResultStub without json file.
      *
      * @author bertrand
      */
-    public WeatherStub(String path, int status) {
+    public WeatherResultStub(String path, int status) {
         this.path = path;
         this.status = status;
         this.jsonFileName = null;
     }
 
     /**
-     * WeatherStub with json file.
+     * WeatherResultStub with json file.
      *
      * @author bertrand
      */
-    public WeatherStub(String path, int status, String jsonFileName) {
+    public WeatherResultStub(String path, int status, String jsonFileName) {
         this.path = path;
         this.status = status;
         this.jsonFileName = jsonFileName;
@@ -47,8 +47,7 @@ public class WeatherStub implements StubCase {
     @Override
     public void stub() {
         try {
-            ResponseDefinitionBuilder response = aResponse().withStatus(status).withHeader("Content-type",
-                    "application/json");
+            ResponseDefinitionBuilder response = aResponse().withStatus(status).withHeader("Content-type", "application/json");
 
             if (this.jsonFileName != null) {
                 response.withBody(IOUtils.toByteArray(

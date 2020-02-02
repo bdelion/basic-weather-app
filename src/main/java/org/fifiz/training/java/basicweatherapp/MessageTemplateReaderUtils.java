@@ -1,4 +1,4 @@
-package org.fifiz.training.java.basic_weather_app;
+package org.fifiz.training.java.basicweatherapp;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
  * @author bertrand
  */
 public final class MessageTemplateReaderUtils {
-    private static final Logger LOG = LogManager.getLogger(MessageTemplateReaderUtils.class);
+    private static final Logger MYLOGGER = LogManager.getLogger(MessageTemplateReaderUtils.class);
 
     private MessageTemplateReaderUtils() {
         // not called
@@ -40,16 +40,16 @@ public final class MessageTemplateReaderUtils {
                     resultat = resultat.concat(line).concat(System.getProperty("line.separator"));
                 }
             } catch (IOException io) {
-                LOG.error("Oups ! Pb à la lecture du flux.", io);
+                MYLOGGER.error("Oups ! Pb à la lecture du flux.", io);
             } finally {
                 try {
                     if (inS != null) {
                         inS.close();
                         // [TODEL]
-                        LOG.info("Fermeture Stream");
+                        MYLOGGER.info("Fermeture Stream");
                     }
                 } catch (IOException ex) {
-                    LOG.error("Oups ! Pb à la fermeture du flux.", ex);
+                    MYLOGGER.error("Oups ! Pb à la fermeture du flux.", ex);
                 }
             }
         }

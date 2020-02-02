@@ -1,7 +1,8 @@
-package org.fifiz.training.java.basic_weather_app.own;
+package org.fifiz.training.java.basicweatherapp.own;
 
 /**
- *
+ * StubCase.
+ * 
  * @author bertrand
  */
 public interface StubCase {

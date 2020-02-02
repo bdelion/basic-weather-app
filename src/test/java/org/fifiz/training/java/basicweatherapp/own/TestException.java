@@ -1,4 +1,4 @@
-package org.fifiz.training.java.basic_weather_app.own;
+package org.fifiz.training.java.basicweatherapp.own;
 
 /**
  * TestException.
@@ -6,6 +6,11 @@ package org.fifiz.training.java.basic_weather_app.own;
  * @author bertrand
  */
 public class TestException extends RuntimeException {
+    /**
+     *
+     */
+    private static final long serialVersionUID = -4038476718322850313L;
+
     public TestException(Throwable cause) {
         super(cause);
     }

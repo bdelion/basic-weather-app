@@ -1,4 +1,4 @@
-package org.fifiz.training.java.basic_weather_app.owm;
+package org.fifiz.training.java.basicweatherapp.owm;
 
 /**
  * Classe des coordonnées de localisation météo de http://api.openweathermap.org.

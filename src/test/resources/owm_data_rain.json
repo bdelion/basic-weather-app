@@ -1,0 +1,52 @@
+{
+    "coord": {
+        "lon": -73.99,
+        "lat": 40.73
+    },
+    "weather": [
+        {
+            "id": 500,
+            "main": "Rain",
+            "description": "légère pluie",
+            "icon": "10n"
+        },
+        {
+            "id": 701,
+            "main": "Mist",
+            "description": "brume",
+            "icon": "50n"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 14.22,
+        "pressure": 1026,
+        "humidity": 93,
+        "temp_min": 12.22,
+        "temp_max": 16.11
+    },
+    "visibility": 3219,
+    "wind": {
+        "speed": 2.1,
+        "deg": 30
+    },
+    "rain": {
+        "1h": 0.25,
+        "3h": 0.35
+    },
+    "clouds": {
+        "all": 90
+    },
+    "dt": 1572430830,
+    "sys": {
+        "type": 1,
+        "id": 5141,
+        "country": "US",
+        "sunrise": 1572434616,
+        "sunset": 1572472529
+    },
+    "timezone": -14400,
+    "id": 5128581,
+    "name": "New York",
+    "cod": 200
+}

@@ -1,4 +1,4 @@
-package org.fifiz.training.java.basic_weather_app;
+package fr.fifiz.training.app.java;
 
 import java.io.BufferedReader;
 import java.io.IOException;

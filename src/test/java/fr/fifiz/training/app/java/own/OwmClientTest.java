@@ -8,12 +8,13 @@ import java.net.URL;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 
 import org.eclipse.jetty.server.Response;
-import org.fifiz.training.java.basic_weather_app.owm.OwmClient;
-import org.fifiz.training.java.basic_weather_app.owm.SysInternal;
-import org.fifiz.training.java.basic_weather_app.owm.TechnicalException;
-import org.fifiz.training.java.basic_weather_app.owm.WeatherResult;
 import org.junit.Rule;
 import org.junit.Test;
+
+import fr.fifiz.training.app.java.owm.OwmClient;
+import fr.fifiz.training.app.java.owm.SysInternal;
+import fr.fifiz.training.app.java.owm.TechnicalException;
+import fr.fifiz.training.app.java.owm.WeatherResult;
 
 /**
  * Test OwmClient.

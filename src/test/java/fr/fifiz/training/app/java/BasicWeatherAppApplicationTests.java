@@ -15,14 +15,6 @@ import org.junit.jupiter.api.Test;
  */
 public class BasicWeatherAppApplicationTests {
 
-	/**
-	 * Rigorous Test :-)
-	 */
-	@Test
-	public void contextLoads() {
-		assertTrue(true);
-	}
-
 	@Test
 	public void testMain() throws IOException {
 		String[] args = null;

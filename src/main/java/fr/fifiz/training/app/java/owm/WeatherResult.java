@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Class résultat météo de http://api.openweathermap.org.
+ * 
  * @author bertrand
  */
 public class WeatherResult {
@@ -11,14 +12,18 @@ public class WeatherResult {
     private Integer id;
     private String name;
     private Integer cod;
+    private String message;
     private String base;
     private Integer visibility;
     private Integer dt;
+    private Integer timezone;
     private CoordLocation coord;
     private List<Weather> weather;
     private Main main;
     private Wind wind;
     private Clouds clouds;
+    private Rain rain;
+    private Snow Snow;
     private SysInternal sys;
 
     public Integer getId() {
@@ -45,6 +50,14 @@ public class WeatherResult {
         this.cod = cod;
     }
 
+    public String getMessage() {
+        return this.message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public String getBase() {
         return this.base;
     }
@@ -67,6 +80,14 @@ public class WeatherResult {
 
     public void setDt(Integer dt) {
         this.dt = dt;
+    }
+
+    public Integer getTimezone() {
+        return this.timezone;
+    }
+
+    public void setTimezone(Integer timezone) {
+        this.timezone = timezone;
     }
 
     public CoordLocation getCoord() {
@@ -107,6 +128,22 @@ public class WeatherResult {
 
     public void setClouds(Clouds clouds) {
         this.clouds = clouds;
+    }
+
+    public Rain getRain() {
+        return this.rain;
+    }
+
+    public void setRain(Rain rain) {
+        this.rain = rain;
+    }
+
+    public Snow getSnow() {
+        return this.Snow;
+    }
+
+    public void setSnow(Snow Snow) {
+        this.Snow = Snow;
     }
 
     public SysInternal getSys() {

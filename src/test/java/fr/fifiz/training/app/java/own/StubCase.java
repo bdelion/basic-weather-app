@@ -1,6 +1,7 @@
 package fr.fifiz.training.app.java.own;
 
 /**
+ * StubCase.
  *
  * @author bertrand
  */

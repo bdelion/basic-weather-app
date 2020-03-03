@@ -1,7 +1,9 @@
 package fr.fifiz.training.app.java.owm;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
- * Classe principale.
+ * Classe principale des données météo de http://api.openweathermap.org.
  *
  * @author bertrand
  */
@@ -10,10 +12,14 @@ public class Main {
     private Double temp;
     private Double pressure;
     private Double humidity;
-    private Double temp_min;
-    private Double temp_max;
-    private Double sea_level;
-    private Double grnd_level;
+    @JsonProperty("temp_min")
+    private Double tempMin;
+    @JsonProperty("temp_max")
+    private Double tempMax;
+    @JsonProperty("sea_level")
+    private Double seaLevel;
+    @JsonProperty("grnd_level")
+    private Double grndLevel;
 
     public Double getTemp() {
         return this.temp;
@@ -39,35 +45,35 @@ public class Main {
         this.humidity = humidity;
     }
 
-    public Double getTemp_min() {
-        return this.temp_min;
+    public Double getTempMin() {
+        return this.tempMin;
     }
 
-    public void setTemp_min(Double temp_min) {
-        this.temp_min = temp_min;
+    public void setTempMin(Double tempMin) {
+        this.tempMin = tempMin;
     }
 
-    public Double getTemp_max() {
-        return this.temp_max;
+    public Double getTempMax() {
+        return this.tempMax;
     }
 
-    public void setTemp_max(Double temp_max) {
-        this.temp_max = temp_max;
+    public void setTempMax(Double tempMax) {
+        this.tempMax = tempMax;
     }
 
-    public Double getSea_level() {
-        return this.sea_level;
+    public Double getSeaLevel() {
+        return this.seaLevel;
     }
 
-    public void setSea_level(Double sea_level) {
-        this.sea_level = sea_level;
+    public void setSeaLevel(Double seaLevel) {
+        this.seaLevel = seaLevel;
     }
 
-    public Double getGrnd_level() {
-        return this.grnd_level;
+    public Double getGrndLevel() {
+        return this.grndLevel;
     }
 
-    public void setGrnd_level(Double grnd_level) {
-        this.grnd_level = grnd_level;
+    public void setGrndLevel(Double grndLevel) {
+        this.grndLevel = grndLevel;
     }
 }

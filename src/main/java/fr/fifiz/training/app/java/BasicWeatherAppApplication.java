@@ -1,7 +1,6 @@
 package fr.fifiz.training.app.java;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Scanner;
 
 import org.apache.logging.log4j.LogManager;
@@ -14,23 +13,27 @@ import fr.fifiz.training.app.java.owm.WeatherResult;
 /**
  * Application Java basique et autonome donnant la meteo pour un code postal en
  * France.
- *
+ * <p>
+ * To run this application from the command line, try : java -jar
+ * basic-weather-app-<version>-jar-with-dependencies.jar
+ * <p>
+ * 
  * @author bertrand
  */
-public class WeatherApp {
-    private static final Logger MYLOGGER = LogManager.getLogger(WeatherApp.class);
-    private static final Double DELTATEMP = -273.15;
+public class BasicWeatherAppApplication {
+    private static final Logger MYLOGGER = LogManager.getLogger(BasicWeatherAppApplication.class.getName());
     private static final String FORMATTEMP = "%.2f °C";
     private static final String FORMATSEPARATOR = "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=";
 
     /**
-     * @param args
+     * Main method, used to run the application.
+     * 
+     * @param args the command line arguments
      * @throws MalformedURLException
+     * 
+     * @author bertrand
      */
     public static void main(String[] args) throws MalformedURLException {
-        // To run this application from the command line, try:
-        // java -jar javaBasicTraining.jar
-
         MYLOGGER.info("Start");
 
         // On demande à l'utilisateur de saisir le code postal de la ville dont il veut
@@ -38,22 +41,16 @@ public class WeatherApp {
         System.out.println("Veuillez saisir le code postal de la ville dont vous souhaitez avoir la météo : ");
         Scanner sc = new Scanner(System.in);
         String codePostal = sc.nextLine();
+        MYLOGGER.info("codePostal : " + codePostal);
 
         // appel au service de météo
-        // OwmClient owmc = new OwmClient(codePostal);
-        String urlApiOwm = "http://api.openweathermap.org/data/2.5/weather?zip={codePostal},fr&APPID=8c05dfed7d5d0d8ba3a2bc70b83b227f";
-
-        MYLOGGER.info("codePostal : {}", codePostal);
-        MYLOGGER.info("urlApiOwm : {}", urlApiOwm);
-        urlApiOwm = urlApiOwm.replace("{codePostal}", codePostal);
-        MYLOGGER.info("urlApiOwm.replace : {}", urlApiOwm);
-
-        URL owmUrlClient = new URL(urlApiOwm);
-        OwmClient owmc = new OwmClient(owmUrlClient);
+        OwmClient owmC = new OwmClient(codePostal);
+        MYLOGGER.debug("owmC : " + owmC);
         try {
-            WeatherResult cpWeather = owmc.getWeather();
+            WeatherResult cpWeather = owmC.getWeather();
+            MYLOGGER.debug("cpWeather : " + cpWeather);
             String msgTmpl = MessageTemplateReaderUtils.read();
-            MYLOGGER.info("msgTmpl : {}", msgTmpl);
+            MYLOGGER.debug("msgTmpl : " + msgTmpl);
 
             if (!"".equals(msgTmpl)) {
                 System.out.println(FORMATSEPARATOR);
@@ -63,9 +60,9 @@ public class WeatherApp {
                         .replace("{lat}", String.valueOf(cpWeather.getCoord().getLat()))
                         .replace("{weather.main}", cpWeather.getWeather().get(0).getMain())
                         .replace("{weather.description}", cpWeather.getWeather().get(0).getDescription())
-                        .replace("{temp}", String.format(FORMATTEMP, cpWeather.getMain().getTemp() + DELTATEMP))
-                        .replace("{temp-min}", String.format(FORMATTEMP, cpWeather.getMain().getTemp_min() + DELTATEMP))
-                        .replace("{temp-max}", String.format(FORMATTEMP, cpWeather.getMain().getTemp_max() + DELTATEMP))
+                        .replace("{temp}", String.format(FORMATTEMP, cpWeather.getMain().getTemp()))
+                        .replace("{temp-min}", String.format(FORMATTEMP, cpWeather.getMain().getTempMin()))
+                        .replace("{temp-max}", String.format(FORMATTEMP, cpWeather.getMain().getTempMax()))
                         .replace("{humid}", String.format("%.2f", cpWeather.getMain().getHumidity()))
                         .replace("{wind}", String.format("%.2f m/sec", cpWeather.getWind().getSpeed())));
                 System.out.println(FORMATSEPARATOR);
@@ -79,5 +76,6 @@ public class WeatherApp {
         } finally {
             sc.close();
         }
+        MYLOGGER.info("Finish");
     }
 }

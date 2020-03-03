@@ -2,24 +2,24 @@ package fr.fifiz.training.app.java.own;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URL;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 
-import org.eclipse.jetty.server.Response;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import fr.fifiz.training.app.java.owm.OwmClient;
-import fr.fifiz.training.app.java.owm.SysInternal;
 import fr.fifiz.training.app.java.owm.TechnicalException;
 import fr.fifiz.training.app.java.owm.WeatherResult;
 
 /**
- * Test OwmClient.
+ * Unit test for OwmClient.
  *
  * @author bertrand
  */
@@ -27,21 +27,17 @@ public class OwmClientTest {
     // Chemin de la ressource l'api current weather de OWN
     private static final String WEATHER_API_PATH = "/current";
     //
-    private static final String OWN_CURRENT_RESULT_OK = "owm_current_niort_ok.json";
-    //
     private static final String LOCAL_URL = "http://localhost:{port}{path}";
     //
-    private static final String LOCAL_URL_PORT = "{port}";
+    private static final String LOCAL_URL_MALFORMED = "http://localhost-{port}{path}";
     //
     private static final String LOCAL_URL_PATH = "{path}";
     //
-    private static final Float TEST_MSG = 0.003f;
+    private static final String LOCAL_URL_PORT = "{port}";
     //
-    private static final String TEST_COUNTRY = "FR";
+    private static final String OWN_RESULT_OK = "owm_ok.json";
     //
-    private static final Integer TEST_SUNRISE = 1448522306;
-    //
-    private static final Integer TEST_SUNSET = 1448554781;
+    private static final String OWN_RESULT_CITY_NOT_FOUND = "owm_citynotfound.json";
 
     WireMockServer wireMockServer;
 
@@ -56,39 +52,56 @@ public class OwmClientTest {
         wireMockServer.stop();
     }
 
-    /**
-     * Test OwmClient Rule.
-     *
-     * @author bertrand
-     */
-    /*
-     * @Rule // No-args constructor defaults to port 8080 // 0 to dynamic port
-     * public WireMockRule wireMR = new WireMockRule(0);
-     */
+    @Test
+    public void testCouldNotConnectToClientIfUrlIsMalformed() throws IOException {
+        (new OwmClientStub(wireMockServer, WEATHER_API_PATH, HttpURLConnection.HTTP_NOT_FOUND)).stub();
+        OwmClient client = new OwmClient(
+                new URL(LOCAL_URL_MALFORMED.replace(LOCAL_URL_PORT, String.valueOf(wireMockServer.port()))
+                        .replace(LOCAL_URL_PATH, WEATHER_API_PATH)));
+        try {
+            client.getWeather();
+            fail("Should of thrown an MalformedURLException");
+        } catch (TechnicalException ex) {
+            assertEquals("Oups ! Impossible de se connecter à l'URL fournie par le client.", ex.getMessage());
+        }
+    }
 
     @Test
-    public void testGetWeatherURLOk() throws IOException {
-        (new WeatherStub(wireMockServer, WEATHER_API_PATH, Response.SC_OK, OWN_CURRENT_RESULT_OK)).stub();
-
+    public void testJsonReturnIfCityNotFound() throws IOException {
+        (new OwmClientStub(wireMockServer, WEATHER_API_PATH, HttpURLConnection.HTTP_OK, OWN_RESULT_CITY_NOT_FOUND))
+                .stub();
         OwmClient client = new OwmClient(
                 new URL(LOCAL_URL.replace(LOCAL_URL_PORT, String.valueOf(wireMockServer.port())).replace(LOCAL_URL_PATH,
                         WEATHER_API_PATH)));
-        WeatherResult weatherResult = client.getWeather();
-        assertEquals("Niort", weatherResult.getName());
+
+        WeatherResult weatherResult = null;
+
+        weatherResult = client.getWeather();
+        assertEquals(Integer.parseInt("404"), weatherResult.getCod());
+        assertEquals("city not found", weatherResult.getMessage());
     }
 
     @Test
-    public void testGetWeatherCPOk() throws IOException {
-        (new WeatherStub(wireMockServer, WEATHER_API_PATH, Response.SC_OK, OWN_CURRENT_RESULT_OK)).stub();
+    public void testTechnicalExceptionIfCityNotFound() throws IOException {
+        (new OwmClientStub(wireMockServer, WEATHER_API_PATH, HttpURLConnection.HTTP_NOT_FOUND,
+                OWN_RESULT_CITY_NOT_FOUND)).stub();
+        OwmClient client = new OwmClient(
+                new URL(LOCAL_URL.replace(LOCAL_URL_PORT, String.valueOf(wireMockServer.port())).replace(LOCAL_URL_PATH,
+                        WEATHER_API_PATH)));
 
-        OwmClient client = new OwmClient("49000");
-        WeatherResult weatherResult = client.getWeather();
-        assertEquals("Écouflant", weatherResult.getName());
+        try {
+            client.getWeather();
+            fail("Should of thrown an TechnicalException");
+        } catch (TechnicalException ex) {
+            assertEquals("Statut de la réponse invalide (code retour = '" + HttpURLConnection.HTTP_NOT_FOUND
+                    + "' / message = 'Not Found')", ex.getMessage());
+        }
     }
 
     @Test
-    public void testGetWeather404() throws IOException {
-        (new WeatherStub(wireMockServer, WEATHER_API_PATH, Response.SC_NOT_FOUND)).stub();
+    public void testTechnicalExceptionIfNotFound() throws IOException {
+        (new OwmClientStub(wireMockServer, WEATHER_API_PATH, HttpURLConnection.HTTP_NOT_FOUND,
+                OWN_RESULT_CITY_NOT_FOUND)).stub();
 
         assertThrows(TechnicalException.class, () -> {
             OwmClient client = new OwmClient(
@@ -98,44 +111,77 @@ public class OwmClientTest {
         });
     }
 
-    /**
-     * Mes Tests.
-     *
-     * @author bertrand
-     * @throws IOException
-     */
     @Test
-    public void testGetWeatherBaseOk() throws IOException {
-        (new WeatherStub(wireMockServer, WEATHER_API_PATH, Response.SC_OK, OWN_CURRENT_RESULT_OK)).stub();
+    public void testResultReturnIfCityFoundByUrl() throws IOException {
+        (new OwmClientStub(wireMockServer, WEATHER_API_PATH, HttpURLConnection.HTTP_OK, OWN_RESULT_OK)).stub();
+        OwmClient client = new OwmClient(
+                new URL(LOCAL_URL.replace(LOCAL_URL_PORT, String.valueOf(wireMockServer.port())).replace(LOCAL_URL_PATH,
+                        WEATHER_API_PATH)));
+        WeatherResult weatherResult = client.getWeather();
 
-        OwmClient owmC = new OwmClient(new URL(LOCAL_URL.replace(LOCAL_URL_PORT, String.valueOf(wireMockServer.port()))
-                .replace(LOCAL_URL_PATH, WEATHER_API_PATH)));
-        WeatherResult weatherR = owmC.getWeather();
-        assertEquals("cmc stations", weatherR.getBase());
+        assertEquals(Integer.parseInt("0"), weatherResult.getId());
+        assertEquals("Paris", weatherResult.getName());
+        assertEquals(Integer.parseInt("200"), weatherResult.getCod());
+        assertEquals("stations", weatherResult.getBase());
+        assertEquals(Integer.parseInt("10000"), weatherResult.getVisibility());
+        assertEquals(Integer.parseInt("1572333005"), weatherResult.getDt());
+        assertEquals(Float.parseFloat("48.85"), weatherResult.getCoord().getLat());
+        assertEquals(Float.parseFloat("2.35"), weatherResult.getCoord().getLon());
+        assertEquals("500", weatherResult.getWeather().get(0).getId());
+        assertEquals("Rain", weatherResult.getWeather().get(0).getMain());
+        assertEquals("light rain", weatherResult.getWeather().get(0).getDescription());
+        assertEquals("10d", weatherResult.getWeather().get(0).getIcon());
+        assertEquals(Double.parseDouble("280.69"), weatherResult.getMain().getTemp());
+        assertEquals(Double.parseDouble("1020"), weatherResult.getMain().getPressure());
+        assertEquals(Double.parseDouble("87"), weatherResult.getMain().getHumidity());
+        assertEquals(Double.parseDouble("279.82"), weatherResult.getMain().getTempMin());
+        assertEquals(Double.parseDouble("281.48"), weatherResult.getMain().getTempMax());
+        assertEquals(Double.parseDouble("4.1"), weatherResult.getWind().getSpeed());
+        assertEquals(Double.parseDouble("40"), weatherResult.getWind().getDeg());
+        assertEquals(Integer.parseInt("100"), weatherResult.getClouds().getAll());
+        assertEquals(Integer.parseInt("1"), weatherResult.getSys().getType());
+        assertEquals(Integer.parseInt("6550"), weatherResult.getSys().getId());
+        assertEquals("FR", weatherResult.getSys().getCountry());
+        assertEquals(Integer.parseInt("1572330714"), weatherResult.getSys().getSunrise());
+        assertEquals(Integer.parseInt("1572366995"), weatherResult.getSys().getSunset());
     }
 
-    /**
-     * Mes Tests.
-     *
-     * @author bertrand
-     * @throws IOException
-     */
     @Test
-    public void testGetWeatherSysInternalsOk() throws IOException {
-        (new WeatherStub(wireMockServer, WEATHER_API_PATH, Response.SC_OK, OWN_CURRENT_RESULT_OK)).stub();
+    public void testResultReturnIfCityFoundByZipCode() throws IOException {
+        String zipCode = "75000";
+        String apiUrl = "/data/2.5/weather?zip=" + zipCode
+                + ",fr&units=metric&lang=fr&APPID=8c05dfed7d5d0d8ba3a2bc70b83b227f";
 
-        OwmClient owmC = new OwmClient(new URL(LOCAL_URL.replace(LOCAL_URL_PORT, String.valueOf(wireMockServer.port()))
-                .replace(LOCAL_URL_PATH, WEATHER_API_PATH)));
-        WeatherResult weatherR = owmC.getWeather();
+        (new OwmClientStub(wireMockServer, apiUrl, HttpURLConnection.HTTP_OK, OWN_RESULT_OK)).stub();
+        OwmClient client = new OwmClient(zipCode);
+        client.setOwmUrlClient(new URL(LOCAL_URL.replace(LOCAL_URL_PORT, String.valueOf(wireMockServer.port()))
+                .replace(LOCAL_URL_PATH, apiUrl)));
+        WeatherResult weatherResult = client.getWeather();
 
-        SysInternal sysInt = new SysInternal();
-        sysInt.setMessage(TEST_MSG);
-        sysInt.setCountry(TEST_COUNTRY);
-        sysInt.setSunrise(TEST_SUNRISE);
-        sysInt.setSunset(TEST_SUNSET);
-        assertEquals(sysInt.getMessage(), weatherR.getSys().getMessage(), "Messages égaux.");
-        assertEquals(sysInt.getCountry(), weatherR.getSys().getCountry(), "Country égaux.");
-        assertEquals(sysInt.getSunrise(), weatherR.getSys().getSunrise(), "Sunrise égaux.");
-        assertEquals(sysInt.getSunset(), weatherR.getSys().getSunset(), "Sunset égaux.");
+        assertEquals(Integer.parseInt("0"), weatherResult.getId());
+        assertEquals("Paris", weatherResult.getName());
+        assertEquals(Integer.parseInt("200"), weatherResult.getCod());
+        assertEquals("stations", weatherResult.getBase());
+        assertEquals(Integer.parseInt("10000"), weatherResult.getVisibility());
+        assertEquals(Integer.parseInt("1572333005"), weatherResult.getDt());
+        assertEquals(Float.parseFloat("48.85"), weatherResult.getCoord().getLat());
+        assertEquals(Float.parseFloat("2.35"), weatherResult.getCoord().getLon());
+        assertEquals("500", weatherResult.getWeather().get(0).getId());
+        assertEquals("Rain", weatherResult.getWeather().get(0).getMain());
+        assertEquals("light rain", weatherResult.getWeather().get(0).getDescription());
+        assertEquals("10d", weatherResult.getWeather().get(0).getIcon());
+        assertEquals(Double.parseDouble("280.69"), weatherResult.getMain().getTemp());
+        assertEquals(Double.parseDouble("1020"), weatherResult.getMain().getPressure());
+        assertEquals(Double.parseDouble("87"), weatherResult.getMain().getHumidity());
+        assertEquals(Double.parseDouble("279.82"), weatherResult.getMain().getTempMin());
+        assertEquals(Double.parseDouble("281.48"), weatherResult.getMain().getTempMax());
+        assertEquals(Double.parseDouble("4.1"), weatherResult.getWind().getSpeed());
+        assertEquals(Double.parseDouble("40"), weatherResult.getWind().getDeg());
+        assertEquals(Integer.parseInt("100"), weatherResult.getClouds().getAll());
+        assertEquals(Integer.parseInt("1"), weatherResult.getSys().getType());
+        assertEquals(Integer.parseInt("6550"), weatherResult.getSys().getId());
+        assertEquals("FR", weatherResult.getSys().getCountry());
+        assertEquals(Integer.parseInt("1572330714"), weatherResult.getSys().getSunrise());
+        assertEquals(Integer.parseInt("1572366995"), weatherResult.getSys().getSunset());
     }
 }

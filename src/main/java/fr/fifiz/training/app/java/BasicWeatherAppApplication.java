@@ -21,7 +21,7 @@ import fr.fifiz.training.app.java.owm.WeatherResult;
  * @author bertrand
  */
 public class BasicWeatherAppApplication {
-    private static final Logger MYLOGGER = LogManager.getLogger(BasicWeatherAppApplication.class);
+    private static final Logger MYLOGGER = LogManager.getLogger(BasicWeatherAppApplication.class.getName());
     private static final String FORMATTEMP = "%.2f °C";
     private static final String FORMATSEPARATOR = "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=";
 

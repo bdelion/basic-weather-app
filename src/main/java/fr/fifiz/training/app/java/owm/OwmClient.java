@@ -90,6 +90,7 @@ public class OwmClient {
             }
             // pour avoir une sortie structurée du flux : http://json.parser.online.fr/
             weatherResult = this.jsonMapper.readValue(owmConnection.getInputStream(), WeatherResult.class);
+            LOG.debug("weatherResult : " + weatherResult);
         } catch (ConnectException ex) {
             LOG.warn("Could not connect to client supplied url: " + this.getOwmUrlClient(), ex);
             throw new TechnicalException("Oups ! Impossible de se connecter à l'URL fournie par le client.", ex);

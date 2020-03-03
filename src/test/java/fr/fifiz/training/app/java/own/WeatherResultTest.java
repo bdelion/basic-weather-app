@@ -34,31 +34,31 @@ public class WeatherResultTest {
 
     WeatherResult fromFile = objectMapper.readValue(resource, WeatherResult.class);
 
-    assertEquals(new Integer("0"), fromFile.getId());
+    assertEquals(Integer.parseInt("0"), fromFile.getId());
     assertEquals("Paris", fromFile.getName());
-    assertEquals(new Integer("200"), fromFile.getCod());
+    assertEquals(Integer.parseInt("200"), fromFile.getCod());
     assertEquals("stations", fromFile.getBase());
-    assertEquals(new Integer("10000"), fromFile.getVisibility());
-    assertEquals(new Integer("1572333005"), fromFile.getDt());
-    assertEquals(new Float("48.85"), fromFile.getCoord().getLat());
-    assertEquals(new Float("2.35"), fromFile.getCoord().getLon());
+    assertEquals(Integer.parseInt("10000"), fromFile.getVisibility());
+    assertEquals(Integer.parseInt("1572333005"), fromFile.getDt());
+    assertEquals(Float.parseFloat("48.85"), fromFile.getCoord().getLat());
+    assertEquals(Float.parseFloat("2.35"), fromFile.getCoord().getLon());
     assertEquals("500", fromFile.getWeather().get(0).getId());
     assertEquals("Rain", fromFile.getWeather().get(0).getMain());
     assertEquals("light rain", fromFile.getWeather().get(0).getDescription());
     assertEquals("10d", fromFile.getWeather().get(0).getIcon());
-    assertEquals(new Double("280.69"), fromFile.getMain().getTemp());
-    assertEquals(new Double("1020"), fromFile.getMain().getPressure());
-    assertEquals(new Double("87"), fromFile.getMain().getHumidity());
-    assertEquals(new Double("279.82"), fromFile.getMain().getTempMin());
-    assertEquals(new Double("281.48"), fromFile.getMain().getTempMax());
-    assertEquals(new Double("4.1"), fromFile.getWind().getSpeed());
-    assertEquals(new Double("40"), fromFile.getWind().getDeg());
-    assertEquals(new Integer("100"), fromFile.getClouds().getAll());
-    assertEquals(new Integer("1"), fromFile.getSys().getType());
-    assertEquals(new Integer("6550"), fromFile.getSys().getId());
+    assertEquals(Double.parseDouble("280.69"), fromFile.getMain().getTemp());
+    assertEquals(Double.parseDouble("1020"), fromFile.getMain().getPressure());
+    assertEquals(Double.parseDouble("87"), fromFile.getMain().getHumidity());
+    assertEquals(Double.parseDouble("279.82"), fromFile.getMain().getTempMin());
+    assertEquals(Double.parseDouble("281.48"), fromFile.getMain().getTempMax());
+    assertEquals(Double.parseDouble("4.1"), fromFile.getWind().getSpeed());
+    assertEquals(Double.parseDouble("40"), fromFile.getWind().getDeg());
+    assertEquals(Integer.parseInt("100"), fromFile.getClouds().getAll());
+    assertEquals(Integer.parseInt("1"), fromFile.getSys().getType());
+    assertEquals(Integer.parseInt("6550"), fromFile.getSys().getId());
     assertEquals("FR", fromFile.getSys().getCountry());
-    assertEquals(new Integer("1572330714"), fromFile.getSys().getSunrise());
-    assertEquals(new Integer("1572366995"), fromFile.getSys().getSunset());
+    assertEquals(Integer.parseInt("1572330714"), fromFile.getSys().getSunrise());
+    assertEquals(Integer.parseInt("1572366995"), fromFile.getSys().getSunset());
   }
 
   @Test
@@ -67,7 +67,7 @@ public class WeatherResultTest {
 
     WeatherResult fromFile = objectMapper.readValue(resource, WeatherResult.class);
 
-    assertEquals(new Integer("404"), fromFile.getCod(), "Mauvais code retour");
+    assertEquals(Integer.parseInt("404"), fromFile.getCod(), "Mauvais code retour");
   }
 
   @Test
@@ -78,8 +78,8 @@ public class WeatherResultTest {
 
     assertEquals("Rain", fromFile.getWeather().get(0).getMain());
     assertEquals("légère pluie", fromFile.getWeather().get(0).getDescription());
-    assertEquals(new Double("0.25"), fromFile.getRain().getOneHour());
-    assertEquals(new Double("0.35"), fromFile.getRain().getThreeHour());
+    assertEquals(Double.parseDouble("0.25"), fromFile.getRain().getOneHour());
+    assertEquals(Double.parseDouble("0.35"), fromFile.getRain().getThreeHour());
   }
 
   @Test
@@ -90,7 +90,7 @@ public class WeatherResultTest {
 
     assertEquals("Snow", fromFile.getWeather().get(0).getMain());
     assertEquals("légères chutes de neige", fromFile.getWeather().get(0).getDescription());
-    assertEquals(new Double("0.03"), fromFile.getSnow().getOneHour());
-    assertEquals(new Double("0.13"), fromFile.getSnow().getThreeHour());
+    assertEquals(Double.parseDouble("0.03"), fromFile.getSnow().getOneHour());
+    assertEquals(Double.parseDouble("0.13"), fromFile.getSnow().getThreeHour());
   }
 }

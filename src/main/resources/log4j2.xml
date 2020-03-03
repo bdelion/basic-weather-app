@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<configuration status="INFO">
+<Configuration status="INFO">
 	<Properties>
 		<Property name="myfilename">logs/basic-weather-app.log</Property>
 	</Properties>
 
-	<appenders>
+	<Appenders>
 		<Console name="Console" target="SYSTEM_OUT">
 			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] [%highlight{%-5level}{FATAL=bg_red, ERROR=red, WARN=yellow, INFO=green, DEBUG=blue}] %logger{36} - %msg%n" />
 		</Console>
@@ -13,12 +13,11 @@
 				<Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
 			</PatternLayout>
 		</File>
-	</appenders>
-
-	<loggers>
-		<root level="INFO">
-<!-- 			<appenderRef ref="Console" /> -->
-			<appenderRef ref="Filelog" />
-		</root>
-	</loggers>
-</configuration>
+	</Appenders>
+	<Loggers>
+		<Root level="debug">
+			<!-- <AppenderRef ref="Console" /> -->
+			<AppenderRef ref="filename" />
+		</Root>
+	</Loggers>
+</Configuration>

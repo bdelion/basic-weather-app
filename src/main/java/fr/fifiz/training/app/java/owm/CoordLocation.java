@@ -1,7 +1,9 @@
 package fr.fifiz.training.app.java.owm;
 
 /**
- * Classe des coordonnées de localisation météo de http://api.openweathermap.org.
+ * Classe des coordonnées de localisation météo de
+ * http://api.openweathermap.org.
+ * 
  * @author bertrand
  */
 public class CoordLocation {

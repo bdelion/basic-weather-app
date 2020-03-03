@@ -27,7 +27,7 @@
     <properties>
         <!-- Assembly -->
         <maven-assembly-plugin-skip>false</maven-assembly-plugin-skip>
-        <main-class>fr.fifiz.training.app.java.WeatherApp</main-class>
+        <main-class>fr.fifiz.training.app.java.BasicWeatherAppApplication</main-class>
     </properties>
 
     <!-- Liste des dependances -->

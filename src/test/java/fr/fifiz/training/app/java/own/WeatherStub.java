@@ -1,4 +1,4 @@
-package org.fifiz.training.java.basic_weather_app.own;
+package fr.fifiz.training.app.java.own;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;

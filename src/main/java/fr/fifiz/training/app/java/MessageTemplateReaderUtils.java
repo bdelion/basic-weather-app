@@ -43,11 +43,8 @@ public final class MessageTemplateReaderUtils {
                 LOG.error("Oups ! Pb à la lecture du flux.", io);
             } finally {
                 try {
-                    if (inS != null) {
-                        inS.close();
-                        // [TODEL]
-                        LOG.info("Fermeture Stream");
-                    }
+                    inS.close();
+                    LOG.info("Fermeture Stream");
                 } catch (IOException ex) {
                     LOG.error("Oups ! Pb à la fermeture du flux.", ex);
                 }

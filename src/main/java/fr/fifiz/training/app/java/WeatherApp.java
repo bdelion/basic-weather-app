@@ -43,17 +43,17 @@ public class WeatherApp {
         // OwmClient owmc = new OwmClient(codePostal);
         String urlApiOwm = "http://api.openweathermap.org/data/2.5/weather?zip={codePostal},fr&APPID=8c05dfed7d5d0d8ba3a2bc70b83b227f";
 
-        MYLOGGER.info("codePostal : " + codePostal);
-        MYLOGGER.info("urlApiOwm : " + urlApiOwm);
+        MYLOGGER.info("codePostal : {}", codePostal);
+        MYLOGGER.info("urlApiOwm : {}", urlApiOwm);
         urlApiOwm = urlApiOwm.replace("{codePostal}", codePostal);
-        MYLOGGER.info("urlApiOwm.replace : " + urlApiOwm);
+        MYLOGGER.info("urlApiOwm.replace : {}", urlApiOwm);
 
         URL owmUrlClient = new URL(urlApiOwm);
         OwmClient owmc = new OwmClient(owmUrlClient);
         try {
             WeatherResult cpWeather = owmc.getWeather();
             String msgTmpl = MessageTemplateReaderUtils.read();
-            MYLOGGER.info("msgTmpl : " + msgTmpl);
+            MYLOGGER.info("msgTmpl : {}", msgTmpl);
 
             if (!"".equals(msgTmpl)) {
                 System.out.println(FORMATSEPARATOR);

@@ -1,4 +1,4 @@
-package org.fifiz.training.java.basicweatherapp;
+package fr.fifiz.training.app.java;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -43,11 +43,8 @@ public final class MessageTemplateReaderUtils {
                 MYLOGGER.error("Oups ! Pb à la lecture du flux.", io);
             } finally {
                 try {
-                    if (inS != null) {
                         inS.close();
-                        // [TODEL]
                         MYLOGGER.info("Fermeture Stream");
-                    }
                 } catch (IOException ex) {
                     MYLOGGER.error("Oups ! Pb à la fermeture du flux.", ex);
                 }

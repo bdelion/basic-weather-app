@@ -1,12 +1,12 @@
-package org.fifiz.training.java.basicweatherapp;
+package fr.fifiz.training.app.java;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit test for BasicWeatherAppApplication simple App.

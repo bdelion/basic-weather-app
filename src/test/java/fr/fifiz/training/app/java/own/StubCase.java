@@ -1,4 +1,4 @@
-package org.fifiz.training.java.basicweatherapp.own;
+package fr.fifiz.training.app.java.own;
 
 /**
  * StubCase.

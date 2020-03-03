@@ -1,20 +1,21 @@
-package org.fifiz.training.java.basicweatherapp.own;
+package fr.fifiz.training.app.java.own;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
-//TODEL import org.eclipse.jetty.server.Response;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
+import com.github.tomakehurst.wiremock.WireMockServer;
 
-import org.fifiz.training.java.basicweatherapp.owm.OwmClient;
-import org.fifiz.training.java.basicweatherapp.owm.TechnicalException;
-import org.fifiz.training.java.basicweatherapp.owm.WeatherResult;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import fr.fifiz.training.app.java.owm.OwmClient;
+import fr.fifiz.training.app.java.owm.TechnicalException;
+import fr.fifiz.training.app.java.owm.WeatherResult;
 
 /**
  * Unit test for OwmClient.
@@ -37,16 +38,24 @@ public class OwmClientTest {
   //
   private static final String OWN_RESULT_CITY_NOT_FOUND = "owm_citynotfound.json";
 
-  @Rule
-  // No-args constructor defaults to port 8080
-  // 0 to dynamic port
-  public WireMockRule wireMR = new WireMockRule(0);
+  WireMockServer wireMockServer;
+
+  @BeforeEach
+  public void setup() {
+    wireMockServer = new WireMockServer(0);
+    wireMockServer.start();
+  }
+
+  @AfterEach
+  public void teardown() {
+    wireMockServer.stop();
+  }
 
   @Test
   public void testCouldNotConnectToClientIfUrlIsMalformed() throws IOException {
-    (new WeatherResultStub(WEATHER_API_PATH, HttpURLConnection.HTTP_NOT_FOUND)).stub();
-    OwmClient client = new OwmClient(new URL(LOCAL_URL_MALFORMED.replace(LOCAL_URL_PORT, String.valueOf(wireMR.port()))
-        .replace(LOCAL_URL_PATH, WEATHER_API_PATH)));
+    (new WeatherResultStub(wireMockServer, WEATHER_API_PATH, HttpURLConnection.HTTP_NOT_FOUND)).stub();
+    OwmClient client = new OwmClient(new URL(LOCAL_URL_MALFORMED
+        .replace(LOCAL_URL_PORT, String.valueOf(wireMockServer.port())).replace(LOCAL_URL_PATH, WEATHER_API_PATH)));
     try {
       WeatherResult weatherResult = client.getWeather();
       fail("Should of thrown an MalformedURLException");
@@ -57,9 +66,10 @@ public class OwmClientTest {
 
   @Test
   public void testJsonReturnIfCityNotFound() throws IOException {
-    (new WeatherResultStub(WEATHER_API_PATH, HttpURLConnection.HTTP_OK, OWN_RESULT_CITY_NOT_FOUND)).stub();
-    OwmClient client = new OwmClient(new URL(
-        LOCAL_URL.replace(LOCAL_URL_PORT, String.valueOf(wireMR.port())).replace(LOCAL_URL_PATH, WEATHER_API_PATH)));
+    (new WeatherResultStub(wireMockServer, WEATHER_API_PATH, HttpURLConnection.HTTP_OK, OWN_RESULT_CITY_NOT_FOUND))
+        .stub();
+    OwmClient client = new OwmClient(new URL(LOCAL_URL.replace(LOCAL_URL_PORT, String.valueOf(wireMockServer.port()))
+        .replace(LOCAL_URL_PATH, WEATHER_API_PATH)));
 
     WeatherResult weatherResult = null;
 
@@ -70,9 +80,10 @@ public class OwmClientTest {
 
   @Test
   public void testTechnicalExceptionIfCityNotFound() throws IOException {
-    (new WeatherResultStub(WEATHER_API_PATH, HttpURLConnection.HTTP_NOT_FOUND, OWN_RESULT_CITY_NOT_FOUND)).stub();
-    OwmClient client = new OwmClient(new URL(
-        LOCAL_URL.replace(LOCAL_URL_PORT, String.valueOf(wireMR.port())).replace(LOCAL_URL_PATH, WEATHER_API_PATH)));
+    (new WeatherResultStub(wireMockServer, WEATHER_API_PATH, HttpURLConnection.HTTP_NOT_FOUND,
+        OWN_RESULT_CITY_NOT_FOUND)).stub();
+    OwmClient client = new OwmClient(new URL(LOCAL_URL.replace(LOCAL_URL_PORT, String.valueOf(wireMockServer.port()))
+        .replace(LOCAL_URL_PATH, WEATHER_API_PATH)));
 
     try {
       client.getWeather();
@@ -85,9 +96,9 @@ public class OwmClientTest {
 
   @Test
   public void testResultReturnIfCityFoundByUrl() throws IOException {
-    (new WeatherResultStub(WEATHER_API_PATH, HttpURLConnection.HTTP_OK, OWN_RESULT_OK)).stub();
-    OwmClient client = new OwmClient(new URL(
-        LOCAL_URL.replace(LOCAL_URL_PORT, String.valueOf(wireMR.port())).replace(LOCAL_URL_PATH, WEATHER_API_PATH)));
+    (new WeatherResultStub(wireMockServer, WEATHER_API_PATH, HttpURLConnection.HTTP_OK, OWN_RESULT_OK)).stub();
+    OwmClient client = new OwmClient(new URL(LOCAL_URL.replace(LOCAL_URL_PORT, String.valueOf(wireMockServer.port()))
+        .replace(LOCAL_URL_PATH, WEATHER_API_PATH)));
     WeatherResult weatherResult = client.getWeather();
 
     assertEquals(new Integer("0"), weatherResult.getId());
@@ -120,11 +131,13 @@ public class OwmClientTest {
   @Test
   public void testResultReturnIfCityFoundByZipCode() throws IOException {
     String zipCode = "75000";
-    String apiUrl = "/data/2.5/weather?zip=" + zipCode + ",fr&units=metric&lang=fr&APPID=8c05dfed7d5d0d8ba3a2bc70b83b227f";
-    
-    (new WeatherResultStub(apiUrl, HttpURLConnection.HTTP_OK, OWN_RESULT_OK)).stub();
+    String apiUrl = "/data/2.5/weather?zip=" + zipCode
+        + ",fr&units=metric&lang=fr&APPID=8c05dfed7d5d0d8ba3a2bc70b83b227f";
+
+    (new WeatherResultStub(wireMockServer, apiUrl, HttpURLConnection.HTTP_OK, OWN_RESULT_OK)).stub();
     OwmClient client = new OwmClient(zipCode);
-    client.setOwmUrlClient(new URL(LOCAL_URL.replace(LOCAL_URL_PORT, String.valueOf(wireMR.port())).replace(LOCAL_URL_PATH, apiUrl)));
+    client.setOwmUrlClient(new URL(
+        LOCAL_URL.replace(LOCAL_URL_PORT, String.valueOf(wireMockServer.port())).replace(LOCAL_URL_PATH, apiUrl)));
     WeatherResult weatherResult = client.getWeather();
 
     assertEquals(new Integer("0"), weatherResult.getId());

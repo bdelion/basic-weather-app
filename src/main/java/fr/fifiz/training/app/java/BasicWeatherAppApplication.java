@@ -1,16 +1,27 @@
-package org.fifiz.training.java.basicweatherapp;
+package fr.fifiz.training.app.java;
 
 import java.net.MalformedURLException;
 import java.util.Scanner;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.fifiz.training.java.basicweatherapp.owm.OwmClient;
-import org.fifiz.training.java.basicweatherapp.owm.TechnicalException;
-import org.fifiz.training.java.basicweatherapp.owm.WeatherResult;
 
+import fr.fifiz.training.app.java.owm.OwmClient;
+import fr.fifiz.training.app.java.owm.TechnicalException;
+import fr.fifiz.training.app.java.owm.WeatherResult;
+
+/**
+ * Application Java basique et autonome donnant la meteo pour un code postal en
+ * France.
+ * <p>
+ * To run this application from the command line, try : java -jar
+ * basic-weather-app-<version>-jar-with-dependencies.jar
+ * <p>
+ *
+ * @author bertrand
+ */
 public class BasicWeatherAppApplication {
-	private static final Logger MYLOGGER = LogManager.getLogger(BasicWeatherAppApplication.class);
+    private static final Logger MYLOGGER = LogManager.getLogger(BasicWeatherAppApplication.class);
     private static final String FORMATTEMP = "%.2f °C";
     private static final String FORMATSEPARATOR = "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=";
 

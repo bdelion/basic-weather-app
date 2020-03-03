@@ -1,13 +1,13 @@
-package org.fifiz.training.java.basicweatherapp.owm;
+package fr.fifiz.training.app.java.owm;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Classe des volumes de neige de http://api.openweathermap.org.
+ * Classe des volumes de pluie de http://api.openweathermap.org.
  * 
  * @author bertrand
  */
-public class Snow {
+public class Rain {
 
     @JsonProperty("1h")
     private Double oneHour;

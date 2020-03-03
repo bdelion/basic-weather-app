@@ -1,4 +1,4 @@
-package org.fifiz.training.java.basicweatherapp.owm;
+package fr.fifiz.training.app.java.owm;
 
 import java.io.IOException;
 import java.net.ConnectException;
@@ -11,7 +11,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.fifiz.training.java.basicweatherapp.owm.WeatherResult;
 
 /**
  * Classe client d'appel à openweathermap.
@@ -21,13 +20,12 @@ import org.fifiz.training.java.basicweatherapp.owm.WeatherResult;
 // Open weather map api key :
 // appid=8c05dfed7d5d0d8ba3a2bc70b83b227f
 public class OwmClient {
-    
+
     private static final Logger LOG = LogManager.getLogger(OwmClient.class.getName());
 
     /**
      * URL du serveur.
      */
-    // TODEL private final URL owmUrlClient;
     private URL owmUrlClient;
 
     private ObjectMapper jsonMapper;
@@ -59,6 +57,7 @@ public class OwmClient {
 
         LOG.debug("codePostal : " + codePostal);
         urlApiOwm = urlApiOwm.replace("{codePostal}", codePostal);
+        LOG.info("urlApiOwm.replace : " + urlApiOwm);
 
         this.owmUrlClient = new URL(urlApiOwm);
         this.jsonMapper = new ObjectMapper();
@@ -91,6 +90,7 @@ public class OwmClient {
             }
             // pour avoir une sortie structurée du flux : http://json.parser.online.fr/
             weatherResult = this.jsonMapper.readValue(owmConnection.getInputStream(), WeatherResult.class);
+            LOG.debug("weatherResult : " + weatherResult);
         } catch (ConnectException ex) {
             LOG.warn("Could not connect to client supplied url: " + this.getOwmUrlClient(), ex);
             throw new TechnicalException("Oups ! Impossible de se connecter à l'URL fournie par le client.", ex);

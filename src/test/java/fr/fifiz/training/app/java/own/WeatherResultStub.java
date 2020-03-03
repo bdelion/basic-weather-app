@@ -1,4 +1,4 @@
-package org.fifiz.training.java.basicweatherapp.own;
+package fr.fifiz.training.app.java.own;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
@@ -7,6 +7,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 
 import java.io.IOException;
 
+import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
 
 import org.apache.commons.io.IOUtils;
@@ -17,7 +18,7 @@ import org.apache.commons.io.IOUtils;
  * @author bertrand
  */
 public class WeatherResultStub implements StubCase {
-
+    private final WireMockServer wireMockServer;
     private final String path;
     private final int status;
     private final String jsonFileName;
@@ -27,7 +28,8 @@ public class WeatherResultStub implements StubCase {
      *
      * @author bertrand
      */
-    public WeatherResultStub(String path, int status) {
+    public WeatherResultStub(final WireMockServer wireMockServer, String path, int status) {
+        this.wireMockServer = wireMockServer;
         this.path = path;
         this.status = status;
         this.jsonFileName = null;
@@ -38,7 +40,8 @@ public class WeatherResultStub implements StubCase {
      *
      * @author bertrand
      */
-    public WeatherResultStub(String path, int status, String jsonFileName) {
+    public WeatherResultStub(final WireMockServer wireMockServer, String path, int status, String jsonFileName) {
+        this.wireMockServer = wireMockServer;
         this.path = path;
         this.status = status;
         this.jsonFileName = jsonFileName;
@@ -47,14 +50,15 @@ public class WeatherResultStub implements StubCase {
     @Override
     public void stub() {
         try {
-            ResponseDefinitionBuilder response = aResponse().withStatus(status).withHeader("Content-type", "application/json");
+            ResponseDefinitionBuilder response = aResponse().withStatus(status).withHeader("Content-type",
+                    "application/json");
 
             if (this.jsonFileName != null) {
                 response.withBody(IOUtils.toByteArray(
                         Thread.currentThread().getContextClassLoader().getResourceAsStream(this.jsonFileName)));
             }
 
-            stubFor(get(urlEqualTo(path)).willReturn(response));
+            this.wireMockServer.stubFor(get(urlEqualTo(path)).willReturn(response));
         } catch (IOException ex) {
             throw new TestException(ex);
         }

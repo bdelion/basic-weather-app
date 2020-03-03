@@ -45,7 +45,7 @@
         <apache.logging.log4j.version>2.12.1</apache.logging.log4j.version>
         <fasterxml.jackson.core.version>2.10.0</fasterxml.jackson.core.version>
         <junit.jupiter.version>5.5.2</junit.jupiter.version>
-        
+
         <main.class>org.fifiz.training.java.basicweatherapp.BasicWeatherAppApplication</main.class>
     </properties>
     <!-- Liste des dependances -->
@@ -72,7 +72,7 @@
             <artifactId>log4j-slf4j-impl</artifactId>
             <version>${apache.logging.log4j.version}</version>
         </dependency>
-<!-- Pour Json -->
+        <!-- Pour Json -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
@@ -87,21 +87,21 @@
         </dependency>
         <!-- Pour les TU -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13-rc-1</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.6.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.6.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.github.tomakehurst</groupId>
             <artifactId>wiremock</artifactId>
-            <version>2.25.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.6</version>
+            <version>2.26.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

@@ -58,20 +58,20 @@
     <url>https://github.com/bdelion/basic-weather-app/actions</url>
   </ciManagement>
 
-  <!-- Repositories nécessaire pour avoir accès aux packages GitHub -->
-  <repositories>
-    <repository>
-      <id>github</id>
+    <!-- Repositories nécessaire pour avoir accès aux packages GitHub -->
+    <repositories>
+        <repository>
+            <id>github</id>
       <name>GitHub bdelion/maven-packages Apache Maven Packages</name>
       <url>https://maven.pkg.github.com/bdelion/maven-packages</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <properties>
         <!-- Assembly -->
@@ -121,6 +121,11 @@
     <!-- Liste des dependances -->
     <dependencies>
         <!-- Pour les logs -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.13.1</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>

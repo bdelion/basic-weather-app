@@ -15,7 +15,7 @@ import fr.fifiz.training.app.java.owm.WeatherResult;
  * France.
  * <p>
  * To run this application from the command line, try : java -jar
- * basic-weather-app-<version>-jar-with-dependencies.jar
+ * basic-weather-app-{{version}}-jar-with-dependencies.jar
  * <p>
  *
  * @author bertrand

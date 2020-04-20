@@ -28,17 +28,17 @@
 >
 > Cette application fait appel à l'API [Current weather data de openweathermap].
 
-## 🏠 [Homepage]
+## :house: [Homepage]
 
 ## Usage
 
 Pour exécuter localement `basic-weather-app`, il faut :
 
-1. tout d'abord télécharger [basic-weather-app-0.0.1.jar](#)
+1. tout d'abord télécharger [basic-weather-app-1.0.0-jar-with-dependencies.jar]
 2. exécuter la commande :
 
     ```sh
-    java -jar basic-weather-app-0.0.1.jar
+    java -jar basic-weather-app-1.0.0-jar-with-dependencies.jar
     ```
 
 3. A la question `Veuillez saisir le code postal de la ville dont vous souhaitez avoir la météo :` il suffit de saisir un code postal, par exemple `44000` pour obtenir les réusltats suivants :
@@ -68,7 +68,7 @@ Pour exécuter localement `basic-weather-app`, il faut :
 -   [Maven] - Outil de gestion et d'automatisation de production des projets logiciels.
 -   [Travis CI] - Logiciel libre d'intégration continue.
 -   [Codacy] - Outil d'analyse de code : qualité, compléxité, duplication et taux de couverture des tests unitaires.
--   [Code Climate / Quality]: https://codeclimate.com/quality/ - Outil d'analyse de code : qualité, maintenabilité, duplication et taux de couverture des tests unitaires.
+-   [Code Climate / Quality] - Outil d'analyse de code : qualité, maintenabilité, duplication et taux de couverture des tests unitaires.
 -   [Code Coverage] - Outil d'analyse de la couverture de tests.
 -   [Coveralls] - Outil d'analyse de la couverture de tests.
 -   [SonarCloud] - Service en ligne d'analyse de qualité et de sécurité du code.
@@ -92,7 +92,9 @@ N'hésitez pas à consulter la page des [issues], et à ouvrir une `issue` afin 
 
 ## :bookmark: Versioning
 
-Nous utilisons [SemVer] pour le versioning. Pour les versions disponibles, voir [les tags de ce projet].
+Nous utilisons [SemVer] pour le versioning.
+
+Pour les versions disponibles, voir [les tags de ce projet].
 
 ## :link: Liens utiles
 
@@ -111,7 +113,7 @@ Nous utilisons [SemVer] pour le versioning. Pour les versions disponibles, voir 
 [javabasictraining]: https://github.com/bdelion/javaBasicTraining.git
 [current weather data de openweathermap]: https://openweathermap.org/current
 [homepage]: https://github.com/bdelion/basic-weather-app/tree/master
-[basic-weather-app-1.0.0-jar-with-dependencies.jar]: https://github.com/bdelion/maven-packages/packages/183594?version=1.0.0
+[basic-weather-app-1.0.0-jar-with-dependencies.jar]: https://github.com/bdelion/maven-packages/packages/183837?version=1.0.0
 [visual studio code]: https://code.visualstudio.com/
 [maven]: https://maven.apache.org/
 [travis ci]: https://travis-ci.com/

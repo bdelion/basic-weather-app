@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <!-- Version du fichier -->
-  <modelVersion>4.0.0</modelVersion>
-  <!-- Pom parent -->
-  <parent>
-    <groupId>fr.fifiz.socle.java</groupId>
-    <artifactId>java-parent</artifactId>
-    <version>8.0.0-SNAPSHOT</version>
-  </parent>
-  <!-- Definition de l'artefact -->
-  <groupId>fr.fifiz.training.app.java</groupId>
-  <artifactId>basic-weather-app</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
-  <name>FIFIZ :: Java App :: basic-weather-app</name>
-  <description>Application Java basique et autonome donnant la météo pour un code postal en France</description>
+    <!-- Version du fichier -->
+    <modelVersion>4.0.0</modelVersion>
+    <!-- Pom parent -->
+    <parent>
+        <groupId>fr.fifiz.socle.java</groupId>
+        <artifactId>java-parent</artifactId>
+        <version>8.0.0-SNAPSHOT</version>
+    </parent>
+    <!-- Definition de l'artefact -->
+    <groupId>fr.fifiz.training.app.java</groupId>
+    <artifactId>basic-weather-app</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>FIFIZ :: Java App :: basic-weather-app</name>
+    <description>Application Java basique et autonome donnant la météo pour un code postal en France</description>
 
   <!-- FIXME change it to the project's website -->
   <url>https://bdelion.github.io/basic-weather-app/</url>
@@ -41,14 +41,14 @@
     </developer>
   </developers>
 
-  <!-- Gestionnaire de code source -->
-  <!-- https://github.com/kevinsawicki/github-maven-example/blob/master/example/pom.xml -->
-  <scm>
-    <url>https://github.com/bdelion/basic-weather-app</url>
-    <connection>scm:git:git://github.com/bdelion/basic-weather-app.git</connection>
-    <developerConnection>scm:git:git@github.com:bdelion/basic-weather-app.git</developerConnection>
-    <tag>HEAD</tag>
-  </scm>
+    <!-- Gestionnaire de code source -->
+    <!-- https://github.com/kevinsawicki/github-maven-example/blob/master/example/pom.xml -->
+    <scm>
+        <url>https://github.com/bdelion/basic-weather-app</url>
+        <connection>scm:git:git://github.com/bdelion/basic-weather-app.git</connection>
+        <developerConnection>scm:git:git@github.com:bdelion/basic-weather-app.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
   <issueManagement>
     <url>https://github.com/bdelion/basic-weather-app/issues</url>
     <system>GitHub Issues</system>
@@ -58,26 +58,26 @@
     <url>https://github.com/bdelion/basic-weather-app/actions</url>
   </ciManagement>
 
-  <!-- Repositories nécessaire pour avoir accès aux packages GitHub -->
-  <repositories>
-    <repository>
-      <id>github</id>
+    <!-- Repositories nécessaire pour avoir accès aux packages GitHub -->
+    <repositories>
+        <repository>
+            <id>github</id>
       <name>GitHub bdelion/maven-packages Apache Maven Packages</name>
       <url>https://maven.pkg.github.com/bdelion/maven-packages</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
-  <properties>
-    <!-- Assembly -->
-    <maven-assembly-plugin-skip>false</maven-assembly-plugin-skip>
-    <main-class>fr.fifiz.training.app.java.BasicWeatherAppApplication</main-class>
-  </properties>
+    <properties>
+        <!-- Assembly -->
+        <maven-assembly-plugin-skip>false</maven-assembly-plugin-skip>
+        <main-class>fr.fifiz.training.app.java.BasicWeatherAppApplication</main-class>
+    </properties>
 
   <dependencyManagement>
     <dependencies>
@@ -118,52 +118,58 @@
     </dependencies>
   </dependencyManagement>
 
-  <!-- Liste des dependances -->
-  <dependencies>
-    <!-- Pour les logs -->
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-core</artifactId>
-      <version>2.13.1</version>
-      <scope>compile</scope>
-    </dependency>
+    <!-- Liste des dependances -->
+    <dependencies>
+        <!-- Pour les logs -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.13.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.13.1</version>
+            <scope>compile</scope>
+        </dependency>
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-api</artifactId>
       <version>2.13.1</version>
     </dependency>
-    <!-- Pour Json -->
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-annotations</artifactId>
-    </dependency>
-    <!-- Pour les tests -->
-    <!-- https://mvnrepository.com/artifact/com.github.tomakehurst/wiremock -->
-    <dependency>
-      <groupId>com.github.tomakehurst</groupId>
-      <artifactId>wiremock</artifactId>
-      <version>2.26.3</version>
+        <!-- Pour Json -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+        </dependency>
+        <!-- Pour les tests -->
+        <!-- https://mvnrepository.com/artifact/com.github.tomakehurst/wiremock -->
+        <dependency>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock</artifactId>
+            <version>2.26.3</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
       <scope>test</scope>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
     </dependency>
     <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
       <scope>test</scope>
-    </dependency>
-  </dependencies>
+        </dependency>
+    </dependencies>
+
 </project>

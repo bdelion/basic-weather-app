@@ -1,3 +1,8 @@
+# Set the token in Travis environment settings instead defining here.
+env:
+  global:
+    - CODECOV_TOKEN="f095166d-5a9b-4a1a-ada5-97a227937eae"
+    - CC_TEST_REPORTER_ID="642ea9f3c58c93cf5dcb6287099228ac278dd9095311feebf2c041756875bd32"
 language: java
 jdk:
   - openjdk8
@@ -6,9 +11,30 @@ cache:
     - $HOME/.m2
 install: true
 
+#For Code Climate Test Coverage
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+
 script:
   - mvn -U clean compile -Pproject-controls-check --file pom.xml --settings .github/workflows/settings.xml
   - mvn -U -Dmaven.main.skip test --file pom.xml --settings .github/workflows/settings.xml
   - mvn -U -Dmaven.main.skip -Dunit.test.skip verify --file pom.xml --settings .github/workflows/settings.xml
   - mvn -U -Dmaven.main.skip -Dunit.test.skip -Dverify.skip jar:jar@default-jar assembly:single@make-assembly source:jar-no-fork@attach-sources javadoc:jar@attach-javadocs deploy --file pom.xml --settings .github/workflows/settings.xml
   - mvn -U site --file pom.xml --settings .github/workflows/settings.xml
+
+after_success:
+  #For Code Climate Test Coverage
+  #Solution from https://github.com/codeclimate/test-reporter/issues/259#issuecomment-374280649
+  # Format jacoco coverage result
+  - JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter format-coverage --input-type jacoco -o coverage/codeclimate.jacoco.json target/site/jacoco/jacoco.xml
+  # Format cobertura coverage result
+  - ./cc-test-reporter format-coverage --input-type cobertura -o coverage/codeclimate.cobertura.json target/site/cobertura/coverage.xml
+  # Sum both coverage parts into coverage/codeclimate.json
+  - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 2
+  # Upload coverage/codeclimate.json
+  - ./cc-test-reporter upload-coverage
+
+  #For Codecov Test Coverage
+  - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"

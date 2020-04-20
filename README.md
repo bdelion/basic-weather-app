@@ -1,16 +1,18 @@
-# Welcome to basic-weather-app 👋
+# Welcome to basic-weather-app :wave:
+
+> NOTE : Le format est basé sur [Make a README].
 
 [![HitCount](http://hits.dwyl.io/bdelion/basic-weather-app.svg)](http://hits.dwyl.io/bdelion/basic-weather-app) [![Version](https://img.shields.io/badge/version-0.0.1-blue.svg?cacheSeconds=2592000)](https://img.shields.io/badge/version-0.0.1-SNAPSHOT-blue.svg?cacheSeconds=2592000) [![Documentation](https://img.shields.io/badge/documentation-yes-brightgreen.svg)](https://github.com/bdelion/basic-weather-app/wiki) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
 
-[![Build Status](https://travis-ci.com/bdelion/basic-weather-app.svg?branch=master)](https://travis-ci.com/bdelion/basic-weather-app)  
+[![Build Status](https://travis-ci.com/bdelion/basic-weather-app.svg?branch=master)](https://travis-ci.com/bdelion/basic-weather-app)
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c661294477af4801929d0abb9e9613cf)](https://www.codacy.com/app/bdelion/basic-weather-app?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=bdelion/basic-weather-app&amp;utm_campaign=Badge_Grade)
-[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/c661294477af4801929d0abb9e9613cf)](https://www.codacy.com/app/bdelion/basic-weather-app?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=bdelion/basic-weather-app&amp;utm_campaign=Badge_Coverage) 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c661294477af4801929d0abb9e9613cf)](https://www.codacy.com/app/bdelion/basic-weather-app?utm_source=github.com&utm_medium=referral&utm_content=bdelion/basic-weather-app&utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/c661294477af4801929d0abb9e9613cf)](https://www.codacy.com/app/bdelion/basic-weather-app?utm_source=github.com&utm_medium=referral&utm_content=bdelion/basic-weather-app&utm_campaign=Badge_Coverage)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/bd5d2ee7ab717b88cad0/maintainability)](https://codeclimate.com/github/bdelion/basic-weather-app/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/bd5d2ee7ab717b88cad0/test_coverage)](https://codeclimate.com/github/bdelion/basic-weather-app/test_coverage)  
+[![Test Coverage](https://api.codeclimate.com/v1/badges/bd5d2ee7ab717b88cad0/test_coverage)](https://codeclimate.com/github/bdelion/basic-weather-app/test_coverage)
 
-[![codecov](https://codecov.io/gh/bdelion/basic-weather-app/branch/master/graph/badge.svg)](https://codecov.io/gh/bdelion/basic-weather-app)  
+[![codecov](https://codecov.io/gh/bdelion/basic-weather-app/branch/master/graph/badge.svg)](https://codecov.io/gh/bdelion/basic-weather-app)
 
 [![Coverage Status](https://coveralls.io/repos/github/bdelion/basic-weather-app/badge.svg?branch=master)](https://coveralls.io/github/bdelion/basic-weather-app?branch=master)
 
@@ -21,12 +23,12 @@
 </p>
 
 > `basic-weather-app` est une application Java basique et autonome donnant la météo pour un code postal en France.
-> 
-> Ce projet remplace [javaBasicTraining](https://github.com/bdelion/javaBasicTraining.git), projet créé lors de la 1ère journée d'une formation Java.
-> 
-> Cette application fait appel à l'API [Current weather data de openweathermap](https://openweathermap.org/current)
+>
+> Ce projet remplace [javaBasicTraining], projet créé lors de la 1ère journée d'une formation Java.
+>
+> Cette application fait appel à l'API [Current weather data de openweathermap].
 
-### 🏠 [Homepage](https://github.com/bdelion/basic-weather-app/tree/master)
+## 🏠 [Homepage]
 
 ## Usage
 
@@ -60,40 +62,73 @@ Pour exécuter localement `basic-weather-app`, il faut :
     =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     ```
 
-## Fabriqué avec
+## :construction_worker: Fabriqué avec
 
-* [Visual Studio Code](https://code.visualstudio.com/) - Editeur de code source.
-* [Maven](https://maven.apache.org/) - Outil de gestion et d'automatisation de production des projets logiciels.
-* [Travis CI](https://travis-ci.com/) - Logiciel libre d'intégration continue.
-* [Codacy](https://www.codacy.com/) - Outil d'analyse de code : qualité, compléxité, duplication et taux de couverture des tests unitaires.
-* [Code Climate / Quality](https://codeclimate.com/quality/) - Outil d'analyse de code : qualité, maintenabilité, duplication et taux de couverture des tests unitaires.
-* [Code Coverage](https://codecov.io/) - Outil d'analyse de la couverture de tests.
-* [Coveralls](https://coveralls.io/) - Outil d'analyse de la couverture de tests.
-* [SonarCloud](https://sonarcloud.io/about) - Service en ligne d'analyse de qualité et de sécurité du code.
+-   [Visual Studio Code] - Editeur de code source.
+-   [Maven] - Outil de gestion et d'automatisation de production des projets logiciels.
+-   [Travis CI] - Logiciel libre d'intégration continue.
+-   [Codacy] - Outil d'analyse de code : qualité, compléxité, duplication et taux de couverture des tests unitaires.
+-   [Code Climate / Quality]: https://codeclimate.com/quality/ - Outil d'analyse de code : qualité, maintenabilité, duplication et taux de couverture des tests unitaires.
+-   [Code Coverage] - Outil d'analyse de la couverture de tests.
+-   [Coveralls] - Outil d'analyse de la couverture de tests.
+-   [SonarCloud] - Service en ligne d'analyse de qualité et de sécurité du code.
 
-## Authors
+## :busts_in_silhouette: Authors
 
-👤 **Bertrand DELION**
+:bust_in_silhouette: **Bertrand DELION**
 
-* Github: [@bdelion](https://github.com/bdelion)
+-   Github: [@bdelion]
 
-Voir aussi la liste des [contributeurs](https://github.com/bdelion/basic-weather-app/graphs/contributors) ayant participés à ce projet.
+Voir aussi la liste des [contributeurs] ayant participés à ce projet.
 
 ## :books: Journal des modifications
 
-Pour connaître les dernières évolutions et leurs impacts, consuler la page [CHANGELOG](CHANGELOG.md)
+Pour connaître les dernières évolutions et leurs impacts, consuler la page [CHANGELOG].
 
-## 🤝 Contributions
+## :handshake: Contributions
 
 Les contributions, problèmes et demandes de fonctionnalités sont les bienvenus !
-N'hésitez pas à consulter la page des [issues](https://github.com/bdelion/basic-weather-app/issues), et à ouvrir une `issue` afin de discuter de ce que vous souhaitez modifier.
+N'hésitez pas à consulter la page des [issues], et à ouvrir une `issue` afin de discuter de ce que vous souhaitez modifier.
 
-## Versioning
+## :bookmark: Versioning
 
-Nous utilisons [SemVer](http://semver.org/) pour le versioning. Pour les versions disponibles, voir [les tags de ce projet](https://github.com/bdelion/basic-weather-app/tags).
+Nous utilisons [SemVer] pour le versioning. Pour les versions disponibles, voir [les tags de ce projet].
 
-## Liens utiles
+## :link: Liens utiles
 
-* Documentation : [Wiki](https://github.com/bdelion/basic-weather-app/wiki)
-* Build : [Jobs Travis CI](https://travis-ci.com/bdelion/basic-weather-app/builds)
-* Repository : [GitHub packages](https://github.com/bdelion/basic-weather-app/packages)
+-   :pencil: Documentation : [Wiki]
+-   :building_construction: Build :
+    -   [Job Travis CI]
+    -   [Github Actions]
+-   Repository : [GitHub Package Registry]
+
+## :spider_web: Dependency
+
+-   [Dependencies] - Dépendances de ce projet
+-   [Dependents] - Projets dépendants de celui-ci
+
+[make a readme]: https://www.makeareadme.com/#template-1
+[javabasictraining]: https://github.com/bdelion/javaBasicTraining.git
+[current weather data de openweathermap]: https://openweathermap.org/current
+[homepage]: https://github.com/bdelion/basic-weather-app/tree/master
+[basic-weather-app-1.0.0-jar-with-dependencies.jar]: https://github.com/bdelion/maven-packages/packages/183594?version=1.0.0
+[visual studio code]: https://code.visualstudio.com/
+[maven]: https://maven.apache.org/
+[travis ci]: https://travis-ci.com/
+[codacy]: https://www.codacy.com/
+[code climate / quality]: https://codeclimate.com/quality/
+[code coverage]: https://codecov.io/
+[coveralls]: https://coveralls.io/
+[sonarcloud]: https://sonarcloud.io/about
+[@bdelion]: https://github.com/bdelion
+[contributeurs]: https://github.com/bdelion/basic-weather-app/graphs/contributors
+[changelog]: CHANGELOG.md
+[issues]: https://github.com/bdelion/basic-weather-app/issues
+[semver]: http://semver.org/
+[les tags de ce projet]: https://github.com/bdelion/basic-weather-app/tags
+[wiki]: https://github.com/bdelion/basic-weather-app/wiki
+[job travis ci]: https://travis-ci.com/bdelion/basic-weather-app
+[github actions]: https://github.com/bdelion/basic-weather-app/actions
+[github package registry]: https://github.com/bdelion/basic-weather-app/packages
+[dependencies]: https://github.com/bdelion/basic-weather-app/network/dependencies
+[dependents]: https://github.com/bdelion/basic-weather-app/network/dependents

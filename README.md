@@ -1,10 +1,12 @@
-# Welcome to basic-weather-app :wave:
+# Welcome to `basic-weather-app` :wave:
 
 > NOTE : Le format est basé sur [Make a README].
 
 [![HitCount](http://hits.dwyl.io/bdelion/basic-weather-app.svg)](http://hits.dwyl.io/bdelion/basic-weather-app) [![Version](https://img.shields.io/badge/version-0.0.1-blue.svg?cacheSeconds=2592000)](https://img.shields.io/badge/version-0.0.1-SNAPSHOT-blue.svg?cacheSeconds=2592000) [![Documentation](https://img.shields.io/badge/documentation-yes-brightgreen.svg)](https://github.com/bdelion/basic-weather-app/wiki) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
 
-[![Build Status](https://travis-ci.com/bdelion/basic-weather-app.svg?branch=master)](https://travis-ci.com/bdelion/basic-weather-app)
+![Maven CI for Java](https://github.com/bdelion/basic-weather-app/workflows/Maven%20CI%20for%20Java/badge.svg) [![Build Status](https://travis-ci.com/bdelion/basic-weather-app.svg?branch=master)](https://travis-ci.com/bdelion/basic-weather-app)
+
+[![Known Vulnerabilities](https://snyk.io/test/github/bdelion/basic-weather-app/badge.svg?targetFile=pom.xml)](https://snyk.io/test/github/bdelion/basic-weather-app?targetFile=pom.xml)
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c661294477af4801929d0abb9e9613cf)](https://www.codacy.com/app/bdelion/basic-weather-app?utm_source=github.com&utm_medium=referral&utm_content=bdelion/basic-weather-app&utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/c661294477af4801929d0abb9e9613cf)](https://www.codacy.com/app/bdelion/basic-weather-app?utm_source=github.com&utm_medium=referral&utm_content=bdelion/basic-weather-app&utm_campaign=Badge_Coverage)
@@ -19,7 +21,7 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bdelion_basic-weather-app&metric=alert_status)](https://sonarcloud.io/dashboard?id=bdelion_basic-weather-app) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=bdelion_basic-weather-app&metric=coverage)](https://sonarcloud.io/dashboard?id=bdelion_basic-weather-app) [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=bdelion_basic-weather-app&metric=ncloc)](https://sonarcloud.io/dashboard?id=bdelion_basic-weather-app) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=bdelion_basic-weather-app&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=bdelion_basic-weather-app) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=bdelion_basic-weather-app&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=bdelion_basic-weather-app) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=bdelion_basic-weather-app&metric=security_rating)](https://sonarcloud.io/dashboard?id=bdelion_basic-weather-app) [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=bdelion_basic-weather-app&metric=sqale_index)](https://sonarcloud.io/dashboard?id=bdelion_basic-weather-app) [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=bdelion_basic-weather-app&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=bdelion_basic-weather-app)
 
 <p>
-<a href="https://sourcerer.io/bdelion"><img src="https://sourcerer.io/icons/logo-sharing.svg"height="24px" alt="Sourcerer"></a>
+<a href="https://sourcerer.io/bdelion"><img src="https://sourcerer.io/icons/logo-sharing.svg" height="24px" alt="Sourcerer"></a> <a href="https://www.gitmemory.com/bdelion"><img src="https://www.gitmemory.com/images/logo.png" height="24px" alt="gitMemory"></a>
 </p>
 
 > `basic-weather-app` est une application Java basique et autonome donnant la météo pour un code postal en France.

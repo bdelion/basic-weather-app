@@ -34,6 +34,7 @@ public class OwmClient {
      * Constructor.
      *
      * @author bertrand
+     * @param urlClient non empty string utl to openweatherapp api
      */
     public OwmClient(final URL urlClient) {
         MYLOGGER.debug("urlClient : " + urlClient);
@@ -50,7 +51,8 @@ public class OwmClient {
      * Constructor.
      *
      * @author bertrand
-     * @throws MalformedURLException
+     * @param codePostal non empty string zip code
+     * @throws MalformedURLException if URL is malformed
      */
     public OwmClient(final String codePostal) throws MalformedURLException {
         String urlApiOwm = "http://api.openweathermap.org/data/2.5/weather?zip={codePostal},fr&units=metric&lang=fr&APPID=8c05dfed7d5d0d8ba3a2bc70b83b227f";

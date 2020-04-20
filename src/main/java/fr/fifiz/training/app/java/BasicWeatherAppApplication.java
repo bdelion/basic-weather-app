@@ -15,9 +15,9 @@ import fr.fifiz.training.app.java.owm.WeatherResult;
  * France.
  * <p>
  * To run this application from the command line, try : java -jar
- * basic-weather-app-<version>-jar-with-dependencies.jar
+ * basic-weather-app-{{version}}-jar-with-dependencies.jar
  * <p>
- * 
+ *
  * @author bertrand
  */
 public class BasicWeatherAppApplication {
@@ -27,11 +27,10 @@ public class BasicWeatherAppApplication {
 
     /**
      * Main method, used to run the application.
-     * 
-     * @param args the command line arguments
-     * @throws MalformedURLException
-     * 
+     *
      * @author bertrand
+     * @param args the command line arguments
+     * @throws MalformedURLException if URL is malformed
      */
     public static void main(String[] args) throws MalformedURLException {
         MYLOGGER.info("Start");

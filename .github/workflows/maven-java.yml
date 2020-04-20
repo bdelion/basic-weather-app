@@ -89,7 +89,7 @@ jobs:
           echo "New version: ${{ steps.create-version-number.outputs.replaced }}"
           mvn versions:set -DnewVersion=${{ steps.create-version-number.outputs.replaced }} --file pom.xml
       - name: Build with Maven
-        run: mvn -U clean compile --file pom.xml --settings .github/workflows/settings.xml
+        run: mvn -U clean compile -Pproject-controls-check --file pom.xml --settings .github/workflows/settings.xml
         env:
           SERVER_USERNAME: $GITHUB_ACTOR
           SERVER_PASSWORD: ${{ secrets.MVN_PCKGS_REPO_TOKEN}}

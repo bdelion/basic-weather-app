@@ -75,7 +75,7 @@
 
   <properties>
     <!-- Version -->
-    <apache-log4j.version>2.17.0</apache-log4j.version>
+    <apache-log4j.version>2.17.1</apache-log4j.version>
     <jackson-core.version>2.13.1</jackson-core.version>
     <!-- Assembly -->
     <maven-assembly-plugin-skip>false</maven-assembly-plugin-skip>
@@ -84,18 +84,6 @@
 
   <dependencyManagement>
     <dependencies>
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-api</artifactId>
-        <version>1.7.25</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.commons</groupId>
-        <artifactId>commons-lang3</artifactId>
-        <version>3.10</version>
-        <scope>test</scope>
-      </dependency>
       <!-- Pour Json -->
       <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
@@ -111,6 +99,19 @@
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-annotations</artifactId>
         <version>${jackson-core.version}</version>
+      </dependency>
+      <!-- Pour Tests -->
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.7.25</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>3.10</version>
+        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>commons-io</groupId>

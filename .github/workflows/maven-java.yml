@@ -47,7 +47,7 @@ jobs:
         run: mvn -version
         env:
           SERVER_USERNAME: $GITHUB_ACTOR
-          SERVER_PASSWORD: ${{ secrets.MVN_PCKGS_REPO_TOKEN}}
+          SERVER_PASSWORD: ${{ secrets. MVN_PCKGS_PERSONNAL_TOKEN}}
       - name: Check out from version control
         uses: actions/checkout@v2
       - name: Cache Maven dependencies
@@ -70,7 +70,7 @@ jobs:
           echo "::set-output name=PACKAGING::$(mvn help:evaluate -Dexpression=project.packaging -q -DforceStdout --file pom.xml --settings .github/workflows/settings.xml)"
         env:
           SERVER_USERNAME: $GITHUB_ACTOR
-          SERVER_PASSWORD: ${{ secrets.MVN_PCKGS_REPO_TOKEN}}
+          SERVER_PASSWORD: ${{ secrets. MVN_PCKGS_PERSONNAL_TOKEN}}
       - name: Get short SHA
         id: short-sha
         run: |
@@ -92,17 +92,17 @@ jobs:
         run: mvn -U clean compile -Pproject-controls-check --file pom.xml --settings .github/workflows/settings.xml
         env:
           SERVER_USERNAME: $GITHUB_ACTOR
-          SERVER_PASSWORD: ${{ secrets.MVN_PCKGS_REPO_TOKEN}}
+          SERVER_PASSWORD: ${{ secrets. MVN_PCKGS_PERSONNAL_TOKEN}}
       - name: Unit Test with Maven
         run: mvn -U -Dmaven.main.skip test --file pom.xml --settings .github/workflows/settings.xml
         env:
           SERVER_USERNAME: $GITHUB_ACTOR
-          SERVER_PASSWORD: ${{ secrets.MVN_PCKGS_REPO_TOKEN}}
+          SERVER_PASSWORD: ${{ secrets. MVN_PCKGS_PERSONNAL_TOKEN}}
       - name: Verify with Maven
         run: mvn -U -Dmaven.main.skip -Dunit.test.skip verify --file pom.xml --settings .github/workflows/settings.xml
         env:
           SERVER_USERNAME: $GITHUB_ACTOR
-          SERVER_PASSWORD: ${{ secrets.MVN_PCKGS_REPO_TOKEN}}
+          SERVER_PASSWORD: ${{ secrets. MVN_PCKGS_PERSONNAL_TOKEN}}
       #TODO - name: Set Leak Period [SonarQube]
       #TODO run: checkout du parent commun
       #TODO run: mvn -U clean verify '-Dmaven.test.failure.ignore=true'
@@ -113,9 +113,9 @@ jobs:
         run: mvn -U -Dmaven.main.skip -Dunit.test.skip -Dverify.skip jar:jar@default-jar assembly:single@make-assembly source:jar-no-fork@attach-sources javadoc:jar@attach-javadocs deploy --file pom.xml --settings .github/workflows/settings.xml
         env:
           SERVER_USERNAME: $GITHUB_ACTOR
-          SERVER_PASSWORD: ${{ secrets.MVN_PCKGS_REPO_TOKEN}}
+          SERVER_PASSWORD: ${{ secrets. MVN_PCKGS_PERSONNAL_TOKEN}}
       - name: Site with Maven
         run: mvn -U site --file pom.xml --settings .github/workflows/settings.xml
         env:
           SERVER_USERNAME: $GITHUB_ACTOR
-          SERVER_PASSWORD: ${{ secrets.MVN_PCKGS_REPO_TOKEN}}
+          SERVER_PASSWORD: ${{ secrets. MVN_PCKGS_PERSONNAL_TOKEN}}
